@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-tooltip",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React utility component for making accessible tooltips and/or modals.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -8,9 +8,9 @@
   "engines": {
     "yarn": "^1.0.0"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/ryami333/react-accessible-tooltip.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
   "devDependencies": {
     "babel": "^6.23.0",
