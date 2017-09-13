@@ -1,6 +1,6 @@
 # React Accessible Tooltip
 
-React Accessible Tooltip is a component which lets you build tooltip and modal components without having to think about the accessibility stuff. Simple usage require
+React Accessible Tooltip is a component which lets you build tooltip and modal components without having to think about the accessibility stuff. Basic usage requires you to pass a label component and an overlay component. React Accessible Component passes you the props to assign to them.
 
 ## Getting started
 
