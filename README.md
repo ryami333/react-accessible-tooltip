@@ -23,7 +23,9 @@ tooltip = (
         label={props => {
             const { labelAttributes } = props;
             return (
-                <span className="tooltip-label" {...labelAttributes}>hover me for info</span>
+                <span className="tooltip-label" {...labelAttributes}>
+                    {`hover me for info`}
+                </span>
             );
         }}
         overlay={props => {
@@ -35,7 +37,7 @@ tooltip = (
                     })}
                     {...overlayAttributes}
                 >
-                    here is more info
+                    {`here is more info`}
                 </span>
             );
         }}
