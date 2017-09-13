@@ -1,45 +1,47 @@
-# rollup-starter-lib
+# React Accessible Tooltip
 
-This repo contains a bare-bones example of how to create a library using Rollup, including importing a module from `node_modules` and converting it from CommonJS.
-
-We're creating a library called `react-accessible-tooltip`, which usefully tells us how long we have to wait until lunch, using the [ms](https://github.com/zeit/ms) package:
-
-```js
-console.log('it will be lunchtime in ' + howLongTillLunch());
-```
+React Accessible Tooltip is a component which lets you build tooltip and modal components without having to think about the accessibility stuff. Simple usage require
 
 ## Getting started
 
-Clone this repository and install its dependencies:
+### Installation
+
+Install this package and it's co-dependencies:
 
 ```bash
-git clone https://github.com/rollup/rollup-starter-lib
-cd rollup-starter-lib
-npm install
+npm install react-accessible-tooltip react react-dom
 ```
 
-`npm run build` builds the library to `dist`, generating three files:
+### Simple Usage
 
-* `dist/react-accessible-tooltip.cjs.js`
-    A CommonJS bundle, suitable for use in Node.js, that `require`s the external dependency. This corresponds to the `"main"` field in package.json
-* `dist/react-accessible-tooltip.esm.js`
-    an ES module bundle, suitable for use in other people's libraries and applications, that `import`s the external dependency. This corresponds to the `"module"` field in package.json
-* `dist/react-accessible-tooltip.umd.js`
-    a UMD build, suitable for use in any environment (including the browser, as a `<script>` tag), that includes the external dependency. This corresponds to the `"browser"` field in package.json
+```javascript
+import { Tooltip } from 'react-accessible-tooltip';
+import classnames from 'classnames'; // optional, but suggested.
 
-`npm run dev` builds the library, then keeps rebuilding it whenever the source files change using [rollup-watch](https://github.com/rollup/rollup-watch).
-
-`npm test` builds the library, then tests it.
-
-*Note that you would often include the `dist` folder in your [.gitignore](https://github.com/rollup/rollup-starter-lib/blob/master/.gitignore) file, but they are included here for ease of illustration.*
-
-
-## Variations
-
-* [babel](https://github.com/rollup/rollup-starter-lib/tree/babel) — illustrates writing the source code in ES2015 and transpiling it for older environments with [Babel](https://babeljs.io/)
-* [buble](https://github.com/rollup/rollup-starter-lib/tree/buble) — similar, but using [Bublé](https://buble.surge.sh/) which is a faster alternative with less configuration
-
-
+tooltip = (
+    <Tooltip
+        label={props => {
+            const { labelAttributes } = props;
+            return (
+                <span className="tooltip-label" {...labelAttributes}>hover me for info</span>
+            );
+        }}
+        overlay={props => {
+            const { isHidden, overlayAttributes } = props;
+            return (
+                <span
+                    className={classnames('tooltip-overlay', {
+                        'tooltip-overlay--hidden': isHidden,
+                    })}
+                    {...overlayAttributes}
+                >
+                    here is more info
+                </span>
+            );
+        }}
+    />
+);
+```
 
 ## License
 
