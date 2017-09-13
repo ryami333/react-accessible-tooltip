@@ -8,6 +8,10 @@
   "engines": {
     "yarn": "^1.0.0"
   },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/ryami333/react-accessible-tooltip.git"
+  },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
