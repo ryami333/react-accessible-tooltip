@@ -1,6 +1,8 @@
 # React Accessible Tooltip
 
-React Accessible Tooltip is a component which lets you build tooltip and modal components without having to think about the accessibility stuff. Basic usage requires you to pass a label component and an overlay component. React Accessible Component passes you the props to assign to them.
+React Accessible Tooltip is a component which lets you build accessible tooltips. It handles all the interactivity and accessibility stuff, but keeps out of the way so you can use whatever markup and styling you want.
+
+Basic usage requires you to pass 'label' and 'overlay' render functions. React Accessible Tooltip passes you both the state of the tooltip (`isHidden`) and an object full of properties you should spread across your components (`labelAttributes`, `overlayAttributes`).
 
 ## Getting started
 
@@ -14,35 +16,28 @@ npm install react-accessible-tooltip react react-dom
 
 ### Simple Usage
 
-```javascript
+```js
 import { Tooltip } from 'react-accessible-tooltip';
-import classnames from 'classnames'; // optional, but suggested.
+```
 
-tooltip = (
-    <Tooltip
-        label={props => {
-            const { labelAttributes } = props;
-            return (
-                <span className="tooltip-label" {...labelAttributes}>
-                    {`hover me for info`}
-                </span>
-            );
-        }}
-        overlay={props => {
-            const { isHidden, overlayAttributes } = props;
-            return (
-                <span
-                    className={classnames('tooltip-overlay', {
-                        'tooltip-overlay--hidden': isHidden,
-                    })}
-                    {...overlayAttributes}
-                >
-                    {`here is more info`}
-                </span>
-            );
-        }}
-    />
-);
+```jsx
+<Tooltip
+    label={props => (
+        <span {...props.labelAttributes} className="tooltip-label">
+            {`hover me for info`}
+        </span>
+    )}
+    overlay={props => (
+        <span
+            {...props.overlayAttributes}
+            className={props.isHidden
+                ? 'tooltip-overlay tooltip-overlay--hidden'
+                : 'tooltip-overlay'}
+        >
+            {`this is more info`}
+        </span>
+    )}
+/>
 ```
 
 ## License
