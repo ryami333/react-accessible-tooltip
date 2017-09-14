@@ -54,6 +54,12 @@ describe('<Tooltip />', () => {
         expect(toJson(wrapper)).toMatchSnapshot();
     });
 
+    it("increments the overlay's `id` attribute with each instance.", () => {
+        expect(overlay.find('div').prop('id')).toEqual(
+            'react-accessible-tooltip-1', // as opposed to `react-accessible-tooltip-0`
+        );
+    });
+
     it('hides the overlay by default', () => {
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
