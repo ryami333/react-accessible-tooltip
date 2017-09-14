@@ -1,12 +1,17 @@
 // @flow
 
 import React, { Component } from 'react';
-import consecutive from 'consecutive';
 import type { TooltipProps, TooltipState } from './Tooltip.flow';
 
-const next = consecutive();
+let counter = 0;
 
 class Tooltip extends Component<TooltipProps, TooltipState> {
+    constructor(props: TooltipProps) {
+        super(props);
+        this.identifier = `react-accessible-tooltip-${counter}`;
+        counter += 1;
+    }
+
     state = {
         isHidden: true,
     };
@@ -33,8 +38,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     }
 
     node: ?HTMLDivElement;
-
-    identifier = `react-accessible-tooltip-${next()}`;
+    identifier: string;
 
     render() {
         const { label: Label, overlay: Overlay, ...rest } = this.props;
