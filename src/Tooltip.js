@@ -53,7 +53,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                         tabIndex: '0',
                         'aria-describedby': `#${this.identifier}`,
                         onFocus: () => this.show(),
-                        onClick: () => this.toggle(),
                     }}
                     requestHide={() => this.hide()}
                     requestShow={() => this.show()}
@@ -62,6 +61,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                 <Overlay
                     {...this.state}
                     overlayAttributes={{
+                        tabIndex: '-1',
                         id: this.identifier,
                         'aria-hidden': this.state.isHidden,
                     }}

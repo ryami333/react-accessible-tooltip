@@ -13,7 +13,6 @@ exports[`<Tooltip /> matches the previous snapshot 1`] = `
       labelAttributes={
         Object {
           "aria-describedby": "#react-accessible-tooltip-0",
-          "onClick": [Function],
           "onFocus": [Function],
           "role": "tooltip",
           "tabIndex": "0",
@@ -26,7 +25,6 @@ exports[`<Tooltip /> matches the previous snapshot 1`] = `
       <div
         aria-describedby="#react-accessible-tooltip-0"
         className="LABEL_CLASS HIDDEN_CLASS"
-        onClick={[Function]}
         onFocus={[Function]}
         role="tooltip"
         tabIndex="0"
@@ -38,6 +36,7 @@ exports[`<Tooltip /> matches the previous snapshot 1`] = `
         Object {
           "aria-hidden": true,
           "id": "react-accessible-tooltip-0",
+          "tabIndex": "-1",
         }
       }
       requestHide={[Function]}
@@ -48,6 +47,7 @@ exports[`<Tooltip /> matches the previous snapshot 1`] = `
         aria-hidden={true}
         className="OVERLAY_CLASS HIDDEN_CLASS"
         id="react-accessible-tooltip-0"
+        tabIndex="-1"
       >
         <CloseButton
           onClick={[Function]}
