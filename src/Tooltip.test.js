@@ -74,4 +74,12 @@ describe('<Tooltip />', () => {
         label.simulate('blur');
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
+
+    it('respects a manual close request', () => {
+        label.simulate('focus');
+        expect(wrapper.state('isHidden')).toBeFalsy();
+
+        closeButton.simulate('click');
+        expect(wrapper.state('isHidden')).toBeTruthy();
+    });
 });
