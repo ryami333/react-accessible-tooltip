@@ -6,31 +6,6 @@
 
 var React__default = 'default' in React ? React['default'] : React;
 
-/*!
- * consecutive
- * Get consecutive numbers
- * Copyright(c) 2017 ivanoff .$ curl -A cv ivanoff.org.ua
- * MIT Licensed
- */
-var consecutive = function (begin, base, inc) {
-  var number = begin || 0;
-  if (typeof base !== 'number') base = 10;
-  if (typeof inc !== 'number') inc = 1;
-
-  return function () {
-    var res;
-    if (typeof base === 'undefined' || base === 10) {
-      res = number;
-      number += inc;
-    } else {
-      res = number.toString();
-      number = (parseInt(number, base) + inc).toString(base);
-    }
-
-    return res;
-  };
-};
-
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -45,32 +20,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 //      
 
-var next = consecutive();
+var counter = 0;
 
 var Tooltip = function (_Component) {
     _inherits(Tooltip, _Component);
 
-    function Tooltip() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
+    function Tooltip(props) {
         _classCallCheck(this, Tooltip);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
+        var _this = _possibleConstructorReturn(this, (Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call(this, props));
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+        _this.state = {
             isHidden: true
-        }, _this.identifier = 'react-accessible-tooltip-' + next(), _temp), _possibleConstructorReturn(_this, _ret);
+        };
+
+        _this.identifier = 'react-accessible-tooltip-' + counter;
+        counter += 1;
+        return _this;
     }
 
     _createClass(Tooltip, [{
         key: 'onBlur',
-        value: function onBlur(_ref2) {
-            var relatedTarget = _ref2.relatedTarget,
-                currentTarget = _ref2.currentTarget;
+        value: function onBlur(_ref) {
+            var relatedTarget = _ref.relatedTarget,
+                currentTarget = _ref.currentTarget;
 
             // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
             if (!(relatedTarget && relatedTarget instanceof HTMLElement)) {

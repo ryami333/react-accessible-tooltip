@@ -54,6 +54,12 @@ describe('<Tooltip />', () => {
         expect(toJson(wrapper)).toMatchSnapshot();
     });
 
+    it("increments the overlay's `id` attribute with each instance.", () => {
+        expect(overlay.find('div').prop('id')).toEqual(
+            'react-accessible-tooltip-1', // as opposed to `react-accessible-tooltip-0`
+        );
+    });
+
     it('hides the overlay by default', () => {
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
@@ -66,6 +72,14 @@ describe('<Tooltip />', () => {
         expect(wrapper.state('isHidden')).toBeFalsy();
 
         label.simulate('blur');
+        expect(wrapper.state('isHidden')).toBeTruthy();
+    });
+
+    it('respects a manual close request', () => {
+        label.simulate('focus');
+        expect(wrapper.state('isHidden')).toBeFalsy();
+
+        closeButton.simulate('click');
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
 });
