@@ -1,7 +1,7 @@
 {
   "name": "react-accessible-tooltip",
   "version": "1.2.5",
-  "description": "React utility component for making accessible tooltips and/or modals.",
+  "description": "React utility component for building accessible tooltips.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "browser": "dist/umd/index.js",
