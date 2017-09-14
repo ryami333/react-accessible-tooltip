@@ -122,9 +122,6 @@ var Tooltip = function (_Component) {
                         'aria-describedby': '#' + this.identifier,
                         onFocus: function onFocus() {
                             return _this2.show();
-                        },
-                        onClick: function onClick() {
-                            return _this2.toggle();
                         }
                     },
                     requestHide: function requestHide() {
@@ -139,6 +136,7 @@ var Tooltip = function (_Component) {
                 })),
                 React__default.createElement(Overlay, _extends({}, this.state, {
                     overlayAttributes: {
+                        tabIndex: '-1',
                         id: this.identifier,
                         'aria-hidden': this.state.isHidden
                     },

@@ -62,26 +62,10 @@ describe('<Tooltip />', () => {
         label.simulate('focus');
         expect(wrapper.state('isHidden')).toBeFalsy();
 
+        overlay.simulate('focus');
+        expect(wrapper.state('isHidden')).toBeFalsy();
+
         label.simulate('blur');
-        expect(wrapper.state('isHidden')).toBeTruthy();
-    });
-
-    it('reveals the overlay when the label is clicked, hides when clicked again.', () => {
-        label.simulate('click');
-        expect(wrapper.state('isHidden')).toBeFalsy();
-
-        label.simulate('click');
-        expect(wrapper.state('isHidden')).toBeTruthy();
-    });
-
-    it('reveals the overlay when the label is clicked, does nothing when the overlay is clicked, hides when a custom CloseButton is clicked.', () => {
-        label.simulate('click');
-        expect(wrapper.state('isHidden')).toBeFalsy();
-
-        overlay.simulate('click');
-        expect(wrapper.state('isHidden')).toBeFalsy();
-
-        closeButton.simulate('click');
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
 });
