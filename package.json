@@ -5,9 +5,6 @@
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "browser": "dist/umd/index.js",
-  "engines": {
-    "yarn": "^1.0.0"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
