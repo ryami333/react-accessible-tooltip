@@ -6,11 +6,11 @@
 
     &__title {
         @include typography-title;
-        color: $color-brand-dark;
+        color: $color-grey-dark;
     }
 
     &__subtitle {
         @include typography-heading;
-        color: $color-grey-light;
+        color: $color-brand-dark;
     }
 }

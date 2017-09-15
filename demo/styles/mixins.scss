@@ -23,10 +23,10 @@ $font-weight-open-sans-regular: 400;
 
 @mixin typography-title {
     @include typography-raleway-regular;
-    font-size: 2rem;
+    font-size: 4rem;
 }
 
 @mixin typography-heading {
     @include typography-raleway-regular;
-    font-size: 1.6rem;
+    font-size: 2rem;
 }
