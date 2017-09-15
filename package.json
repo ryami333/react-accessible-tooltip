@@ -61,10 +61,10 @@
     "webpack-dev-server": "^2.8.1"
   },
   "scripts": {
-    "build:dist:flow": "flow-copy-source src dist/es",
-    "build:dist:rollup": "rollup -c",
+    "build:dist:flow": "NODE_ENV=production flow-copy-source src dist/es",
+    "build:dist:rollup": "NODE_ENV=production rollup -c",
     "build:dist": "yarn build:dist:rollup && yarn build:dist:flow",
-    "build:docs": "webpack",
+    "build:docs": "rm -rf docs/ && NODE_ENV=production webpack",
     "build": "yarn build:dist && yarn build:docs",
     "dev:dist": "rollup -c -w",
     "dev:docs": "webpack-dev-server",

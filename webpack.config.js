@@ -12,7 +12,7 @@ const config = {
             };
         }
         return {
-            'main.js': ['react-hot-loader/patch', './demo/main.js'],
+            'demo/main.js': ['react-hot-loader/patch', './demo/main.js'],
         };
     })(),
 
