@@ -1,7 +1,10 @@
+@import '../styles/settings';
+
 // No padding or margins.
 html, body {
     padding: 0;
     margin: 0;
+    background-color: $color-brand-dark;
 }
 
 // Box sizing.
