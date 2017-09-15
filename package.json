@@ -22,7 +22,6 @@
     "babel-preset-jest": "^21.0.2",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "classnames": "^2.2.5",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
     "enzyme": "^2.9.1",
@@ -81,6 +80,7 @@
     "react-dom": "^15.6.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "react-hot-loader": "^3.0.0-beta.7"
   }
 }
