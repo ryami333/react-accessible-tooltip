@@ -1,0 +1,16 @@
+@import '../../styles/settings';
+@import '../../styles/mixins';
+
+.header {
+    background-color: $color-brand-light;
+
+    &__title {
+        @include typography-title;
+        color: $color-brand-dark;
+    }
+
+    &__subtitle {
+        @include typography-heading;
+        color: $color-grey-light;
+    }
+}
