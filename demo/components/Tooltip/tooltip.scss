@@ -11,6 +11,7 @@
     }
 
     &__overlay {
+        display: block;
         $width: 400px;
         width: $width;
         @include typography-small;
@@ -28,6 +29,7 @@
     }
 
     &__overlay-inner {
+        display: block;
         background-color: $color-brand-dark;
         border-radius: 2px;
         position: relative;

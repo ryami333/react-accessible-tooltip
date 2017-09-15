@@ -10,9 +10,9 @@ function Tooltip({ label, overlay }: { label: Node, overlay: Node }) {
         <ReactAccessibleTooltip
             className="tooltip"
             label={({ labelAttributes }: { labelAttributes: Object }) => (
-                <div className="tooltip__label" {...labelAttributes}>
+                <span className="tooltip__label" {...labelAttributes}>
                     <strong>{label}</strong>
-                </div>
+                </span>
             )}
             overlay={({
                 overlayAttributes,
@@ -21,14 +21,14 @@ function Tooltip({ label, overlay }: { label: Node, overlay: Node }) {
                 overlayAttributes: Object,
                 isHidden: boolean,
             }) => (
-                <div
+                <span
                     className={classnames('tooltip__overlay', {
                         'tooltip__overlay--hidden': isHidden,
                     })}
                     {...overlayAttributes}
                 >
-                    <div className="tooltip__overlay-inner">{overlay}</div>
-                </div>
+                    <span className="tooltip__overlay-inner">{overlay}</span>
+                </span>
             )}
         />
     );
