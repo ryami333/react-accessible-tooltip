@@ -1,0 +1,11 @@
+@import '../../styles/settings';
+@import '../../styles/mixins';
+
+.content {
+    background-color: $color-grey-light;
+
+    p {
+        @include typography-body;
+        color: $color-grey-dark;
+    }
+}

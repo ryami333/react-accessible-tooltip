@@ -18,7 +18,7 @@ $font-weight-open-sans-regular: 400;
 
 @mixin typography-body {
     @include typography-open-sans-regular;
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 @mixin typography-title {
