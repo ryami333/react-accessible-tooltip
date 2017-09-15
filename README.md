@@ -14,7 +14,7 @@ Install this package and it's co-dependencies:
 npm install react-accessible-tooltip react react-dom
 ```
 
-### Simple Usage
+### Basic Usage
 
 ```js
 import { Tooltip } from 'react-accessible-tooltip';
@@ -42,21 +42,27 @@ import { Tooltip } from 'react-accessible-tooltip';
 
 ### Props
 
-#### `label` function({ isHidden, labelAttributes, requestHide, requestShow, requestToggle }): React.Node
-The `label` prop requires a render function. The function's arguments contains the following properties:
-- `isHidden` (boolean): The current state of the tooltip.
-- `labelAttributes` (object): The various attributes which ought to be assigned to the outer-most element in your render function (eg. `<span {...labelAttributes} />`).
-- `requestHide` (function): Callable which manually sets the state of the tooltip to 'hidden'.
-- `requestShow` (function): Callable which manually sets the state of the tooltip to 'shown'.
-- `requestToggle` (function): Callable which manually toggles the state of the tooltip between 'shown' or 'hidden'.
+#### label `function({ isHidden, labelAttributes, requestHide, requestShow, requestToggle }) => React.Node`
+The `label` prop should be passed a render function. The function will be called with these arguments:
 
-#### `overlay` function({ isHidden, overlayAttributes, requestHide, requestShow, requestToggle }): React.Node
-The `overlay` prop requires a render function. The function's arguments contains the following properties:
-- `isHidden` (boolean): The current state of the tooltip.
-- `overlayAttributes` (object): The various attributes which ought to be assigned to the outer-most element in your render function (eg. `<span {...overlayAttributes} />`).
-- `requestHide` (function): Callable which manually sets the state of the tooltip to 'hidden'.
-- `requestShow` (function): Callable which manually sets the state of the tooltip to 'shown'.
-- `requestToggle` (function): Callable which manually toggles the state of the tooltip between 'shown' or 'hidden'.
+Property | Type | Description
+-|-|-
+isHidden | boolean | The current state of the tooltip.
+labelAttributes | object | The various attributes which ought to be assigned to the outer-most element in your render function (eg. `<span {...labelAttributes} />`).
+requestHide | function | Callable which manually sets the state of the tooltip to 'hidden'.
+requestShow | function | Callable which manually sets the state of the tooltip to 'shown'.
+requestToggle | function | Callable which manually toggles the state of the tooltip between 'shown' or 'hidden'.
+
+#### overaly `function({ isHidden, overlayAttributes, requestHide, requestShow, requestToggle }) => React.Node`
+The `overlay` prop should be passed a render function. The function will be called with these arguments:
+
+Property | Type | Description
+-|-|-
+isHidden | boolean | The current state of the tooltip.
+overlayAttributes | object | The various attributes which ought to be assigned to the outer-most element in your render function (eg. `<span {...overlayAttributes} />`).
+requestHide | function | Callable which manually sets the state of the tooltip to 'hidden'.
+requestShow | function | Callable which manually sets the state of the tooltip to 'shown'.
+requestToggle | function | Callable which manually toggles the state of the tooltip between 'shown' or 'hidden'.
 
 ## License
 
