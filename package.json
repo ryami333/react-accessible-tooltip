@@ -62,15 +62,16 @@
     "webpack-dev-server": "^2.8.1"
   },
   "scripts": {
-    "build:flow": "flow-copy-source src dist/es",
-    "build:rollup": "rollup -c",
-    "build:module": "yarn build:rollup && yarn build:flow",
-    "build:demo": "yarn webpack",
-    "build": "yarn build:demo && yarn build:module",
-    "dev:rollup": "rollup -c -w",
-    "dev:webpack": "webpack-dev-server",
+    "build:dist:flow": "flow-copy-source src dist/es",
+    "build:dist:rollup": "rollup -c",
+    "build:dist": "yarn build:dist:rollup && yarn build:dist:flow",
+    "build:docs": "webpack",
+    "build": "yarn build:dist && yarn build:docs",
+    "dev:dist": "rollup -c -w",
+    "dev:docs": "webpack-dev-server",
     "test": "jest src",
-    "lint": "eslint src"
+    "lint:dist": "eslint src",
+    "lint:docs": "eslint demo"
   },
   "files": [
     "dist"
