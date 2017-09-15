@@ -20,19 +20,35 @@ $font-weight-open-sans-semibold: 700;
 @mixin typography-body {
     @include typography-open-sans-regular;
     font-size: 1.2rem;
+
+    @media (max-width: 420px) {
+        font-size: 1rem;
+    }
 }
 
 @mixin typography-small {
     @include typography-open-sans-regular;
     font-size: 1rem;
+
+    @media (max-width: 420px) {
+        font-size: 0.8rem;
+    }
 }
 
 @mixin typography-title {
     @include typography-raleway-regular;
     font-size: 4rem;
+
+    @media (max-width: 420px) {
+        font-size: 2rem;
+    }
 }
 
 @mixin typography-heading {
     @include typography-raleway-regular;
     font-size: 2rem;
+
+    @media (max-width: 420px) {
+        font-size: 1.6rem;
+    }
 }
