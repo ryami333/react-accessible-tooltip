@@ -42,7 +42,7 @@ import { Tooltip } from 'react-accessible-tooltip';
 
 ### Props
 
-#### label `function({ isHidden, labelAttributes, requestHide, requestShow, requestToggle }) => React.Node`
+#### label : `function({ isHidden, labelAttributes, requestHide, requestShow, requestToggle }) => React.Node`
 The `label` prop should be passed a render function. The function will be called with these arguments:
 
 Property | Type | Description
@@ -53,7 +53,7 @@ requestHide | function | Callable which manually sets the state of the tooltip t
 requestShow | function | Callable which manually sets the state of the tooltip to 'shown'.
 requestToggle | function | Callable which manually toggles the state of the tooltip between 'shown' or 'hidden'.
 
-#### overaly `function({ isHidden, overlayAttributes, requestHide, requestShow, requestToggle }) => React.Node`
+#### overlay : `function({ isHidden, overlayAttributes, requestHide, requestShow, requestToggle }) => React.Node`
 The `overlay` prop should be passed a render function. The function will be called with these arguments:
 
 Property | Type | Description
