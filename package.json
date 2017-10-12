@@ -69,7 +69,7 @@
     "webpack-dev-server": "^2.8.1"
   },
   "scripts": {
-    "build:dist:flow": "NODE_ENV=production flow-copy-source src dist/es --ignore=*.test.js",
+    "build:dist:flow": "NODE_ENV=production flow-copy-source src dist/umd --ignore=*.test.js",
     "build:dist:rollup": "NODE_ENV=production rollup -c",
     "build:dist": "yarn build:dist:rollup && yarn build:dist:flow",
     "build:docs": "rm -rf docs/ && NODE_ENV=production webpack",
