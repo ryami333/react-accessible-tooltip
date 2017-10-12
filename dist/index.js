@@ -1,4 +1,10 @@
-import React, { Component } from 'react';
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+	(factory((global.reactAccessibleTooltip = {}),global.React));
+}(this, (function (exports,React) { 'use strict';
+
+var React__default = 'default' in React ? React['default'] : React;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -96,22 +102,26 @@ var Tooltip = function (_Component) {
                 requestToggle: this.toggle
             };
 
-            return React.createElement(
+            return React__default.createElement(
                 'div',
                 _extends({}, rest, { onBlur: function onBlur(e) {
                         return _this2.onBlur(e);
                     } }),
-                React.createElement(Label, labelProps),
-                React.createElement(Overlay, overlayProps)
+                React__default.createElement(Label, labelProps),
+                React__default.createElement(Overlay, overlayProps)
             );
         }
     }]);
 
     return Tooltip;
-}(Component);
+}(React.Component);
 
 //      
 
 // eslint-disable-next-line import/prefer-default-export
 
-export { Tooltip };
+exports.Tooltip = Tooltip;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
