@@ -11,10 +11,12 @@
     "plugins": [
         "react",
         "flowtype",
+        "flowtype-errors",
         "jest",
         "prettier"
     ],
     "rules": {
+        "flowtype-errors/show-errors": 2,
         "react/jsx-filename-extension": ["off", { "extensions": [".js", ".jsx"] }],
         "prettier/prettier": ["error", {
             "tabWidth": 4,
