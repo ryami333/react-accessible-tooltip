@@ -35,6 +35,18 @@ var Tooltip = function (_Component) {
             isHidden: true
         };
 
+        _this.hide = function () {
+            _this.setState({ isHidden: true });
+        };
+
+        _this.show = function () {
+            _this.setState({ isHidden: false });
+        };
+
+        _this.toggle = function () {
+            _this.setState({ isHidden: !_this.state.isHidden });
+        };
+
         _this.identifier = 'react-accessible-tooltip-' + counter;
         counter += 1;
         return _this;
@@ -54,21 +66,6 @@ var Tooltip = function (_Component) {
             }
         }
     }, {
-        key: 'hide',
-        value: function hide() {
-            this.setState({ isHidden: true });
-        }
-    }, {
-        key: 'show',
-        value: function show() {
-            this.setState({ isHidden: false });
-        }
-    }, {
-        key: 'toggle',
-        value: function toggle() {
-            this.setState({ isHidden: !this.state.isHidden });
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -78,51 +75,41 @@ var Tooltip = function (_Component) {
                 Overlay = _props.overlay,
                 rest = _objectWithoutProperties(_props, ['label', 'overlay']);
 
+            var isHidden = this.state.isHidden;
+
+
+            var labelProps = {
+                labelAttributes: {
+                    role: 'tooltip',
+                    tabIndex: '0',
+                    'aria-describedby': '#' + this.identifier,
+                    onFocus: this.show
+                },
+                isHidden: isHidden,
+                requestHide: this.hide,
+                requestShow: this.show,
+                requestToggle: this.toggle
+            };
+
+            var overlayProps = {
+                overlayAttributes: {
+                    tabIndex: '-1',
+                    id: this.identifier,
+                    'aria-hidden': this.state.isHidden
+                },
+                isHidden: isHidden,
+                requestHide: this.hide,
+                requestShow: this.show,
+                requestToggle: this.toggle
+            };
+
             return React__default.createElement(
                 'div',
-                _extends({}, rest, {
-                    onBlur: function onBlur(e) {
+                _extends({}, rest, { onBlur: function onBlur(e) {
                         return _this2.onBlur(e);
-                    },
-                    ref: function ref(node) {
-                        _this2.node = node;
-                    }
-                }),
-                React__default.createElement(Label, _extends({}, this.state, {
-                    labelAttributes: {
-                        role: 'tooltip',
-                        tabIndex: '0',
-                        'aria-describedby': '#' + this.identifier,
-                        onFocus: function onFocus() {
-                            return _this2.show();
-                        }
-                    },
-                    requestHide: function requestHide() {
-                        return _this2.hide();
-                    },
-                    requestShow: function requestShow() {
-                        return _this2.show();
-                    },
-                    requestToggle: function requestToggle() {
-                        return _this2.toggle();
-                    }
-                })),
-                React__default.createElement(Overlay, _extends({}, this.state, {
-                    overlayAttributes: {
-                        tabIndex: '-1',
-                        id: this.identifier,
-                        'aria-hidden': this.state.isHidden
-                    },
-                    requestHide: function requestHide() {
-                        return _this2.hide();
-                    },
-                    requestShow: function requestShow() {
-                        return _this2.show();
-                    },
-                    requestToggle: function requestToggle() {
-                        return _this2.toggle();
-                    }
-                }))
+                    } }),
+                React__default.createElement(Label, labelProps),
+                React__default.createElement(Overlay, overlayProps)
             );
         }
     }]);
