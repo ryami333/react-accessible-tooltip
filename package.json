@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-tooltip",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "React utility component for building accessible tooltips.",
   "keywords": [
     "tooltip",
