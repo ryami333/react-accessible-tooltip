@@ -1,18 +1,38 @@
 // @flow
 
 import React, { Component } from 'react';
-import type { Node, ElementProps } from 'react';
+import type { ElementProps, ComponentType } from 'react';
 
 export type TooltipState = {
     isHidden: boolean,
 };
 
-export type LabelProps = ElementProps<'*'> & TooltipState;
-export type OverlayProps = ElementProps<'*'> & TooltipState;
+export type LabelProps = TooltipState & {
+    labelAttributes: {
+        role: 'tooltip',
+        tabIndex: '0',
+        'aria-describedby': string,
+        onFocus: () => {},
+    },
+    requestHide: () => {},
+    requestShow: () => {},
+    requestToggle: () => {},
+};
+
+export type OverlayProps = TooltipState & {
+    overlayAttributes: {
+        tabIndex: '-1',
+        'aria-describedby': string,
+        onFocus: () => {},
+    },
+    requestHide: () => {},
+    requestShow: () => {},
+    requestToggle: () => {},
+};
 
 export type TooltipProps = ElementProps<'div'> & {
-    label: LabelProps => Node,
-    overlay: OverlayProps => Node,
+    label: ComponentType<LabelProps>,
+    overlay: ComponentType<OverlayProps>,
 };
 
 let counter = 0;
