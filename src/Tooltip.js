@@ -3,31 +3,33 @@
 import React, { Component } from 'react';
 import type { ElementProps, ComponentType } from 'react';
 
-export type TooltipState = {
-    isHidden: boolean,
-};
-
-export type LabelProps = TooltipState & {
+export type LabelProps = {
     labelAttributes: {
         role: 'tooltip',
         tabIndex: '0',
         'aria-describedby': string,
         onFocus: () => {},
     },
+    isHidden: boolean,
     requestHide: () => {},
     requestShow: () => {},
     requestToggle: () => {},
 };
 
-export type OverlayProps = TooltipState & {
+export type OverlayProps = {
     overlayAttributes: {
         tabIndex: '-1',
         'aria-describedby': string,
         onFocus: () => {},
     },
+    isHidden: boolean,
     requestHide: () => {},
     requestShow: () => {},
     requestToggle: () => {},
+};
+
+export type TooltipState = {
+    isHidden: boolean,
 };
 
 export type TooltipProps = ElementProps<'div'> & {
@@ -73,27 +75,30 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
     render() {
         const { label: Label, overlay: Overlay, ...rest } = this.props;
+
+        const { isHidden } = this.state;
+
         return (
             <div {...rest} onBlur={e => this.onBlur(e)}>
                 <Label
-                    {...this.state}
                     labelAttributes={{
                         role: 'tooltip',
                         tabIndex: '0',
                         'aria-describedby': `#${this.identifier}`,
                         onFocus: () => this.show(),
                     }}
+                    isHidden={isHidden}
                     requestHide={() => this.hide()}
                     requestShow={() => this.show()}
                     requestToggle={() => this.toggle()}
                 />
                 <Overlay
-                    {...this.state}
                     overlayAttributes={{
                         tabIndex: '-1',
                         id: this.identifier,
                         'aria-hidden': this.state.isHidden,
                     }}
+                    isHidden={isHidden}
                     requestHide={() => this.hide()}
                     requestShow={() => this.show()}
                     requestToggle={() => this.toggle()}
