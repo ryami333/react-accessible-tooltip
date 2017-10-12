@@ -1,8 +1,14 @@
 {
   "name": "react-accessible-tooltip",
-  "version": "1.2.11",
+  "version": "1.2.12",
   "description": "React utility component for building accessible tooltips.",
-  "keywords": ["tooltip", "react", "component", "accessibility", "aria"],
+  "keywords": [
+    "tooltip",
+    "react",
+    "component",
+    "accessibility",
+    "aria"
+  ],
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "browser": "dist/umd/index.js",
@@ -63,8 +69,7 @@
     "webpack-dev-server": "^2.8.1"
   },
   "scripts": {
-    "build:dist:flow":
-      "NODE_ENV=production flow-copy-source src dist/es --ignore=*.test.js",
+    "build:dist:flow": "NODE_ENV=production flow-copy-source src dist/es --ignore=*.test.js",
     "build:dist:rollup": "NODE_ENV=production rollup -c",
     "build:dist": "yarn build:dist:rollup && yarn build:dist:flow",
     "build:docs": "rm -rf docs/ && NODE_ENV=production webpack",
@@ -75,7 +80,9 @@
     "lint:dist": "eslint src",
     "lint:docs": "eslint demo"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
