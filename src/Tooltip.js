@@ -69,19 +69,12 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         this.setState({ isHidden: !this.state.isHidden });
     }
 
-    node: ?HTMLDivElement;
     identifier: string;
 
     render() {
         const { label: Label, overlay: Overlay, ...rest } = this.props;
         return (
-            <div
-                {...rest}
-                onBlur={e => this.onBlur(e)}
-                ref={node => {
-                    this.node = node;
-                }}
-            >
+            <div {...rest} onBlur={e => this.onBlur(e)}>
                 <Label
                     {...this.state}
                     labelAttributes={{
