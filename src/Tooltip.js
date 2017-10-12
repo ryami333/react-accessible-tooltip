@@ -8,24 +8,24 @@ export type LabelProps = {|
         role: 'tooltip',
         tabIndex: '0',
         'aria-describedby': string,
-        onFocus: () => {},
+        onFocus: () => void,
     },
     isHidden: boolean,
-    requestHide: () => {},
-    requestShow: () => {},
-    requestToggle: () => {},
+    requestHide: () => void,
+    requestShow: () => void,
+    requestToggle: () => void,
 |};
 
 export type OverlayProps = {|
     overlayAttributes: {
         tabIndex: '-1',
-        'aria-describedby': string,
-        onFocus: () => {},
+        id: string,
+        'aria-hidden': boolean,
     },
     isHidden: boolean,
-    requestHide: () => {},
-    requestShow: () => {},
-    requestToggle: () => {},
+    requestHide: () => void,
+    requestShow: () => void,
+    requestToggle: () => void,
 |};
 
 export type TooltipState = {
@@ -59,17 +59,17 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         }
     }
 
-    hide() {
+    hide = (): void => {
         this.setState({ isHidden: true });
-    }
+    };
 
-    show() {
+    show = (): void => {
         this.setState({ isHidden: false });
-    }
+    };
 
-    toggle() {
+    toggle = (): void => {
         this.setState({ isHidden: !this.state.isHidden });
-    }
+    };
 
     identifier: string;
 
@@ -78,31 +78,35 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         const { isHidden } = this.state;
 
+        const labelProps: LabelProps = {
+            labelAttributes: {
+                role: 'tooltip',
+                tabIndex: '0',
+                'aria-describedby': `#${this.identifier}`,
+                onFocus: this.show,
+            },
+            isHidden,
+            requestHide: this.hide,
+            requestShow: this.show,
+            requestToggle: this.toggle,
+        };
+
+        const overlayProps: OverlayProps = {
+            overlayAttributes: {
+                tabIndex: '-1',
+                id: this.identifier,
+                'aria-hidden': this.state.isHidden,
+            },
+            isHidden,
+            requestHide: this.hide,
+            requestShow: this.show,
+            requestToggle: this.toggle,
+        };
+
         return (
             <div {...rest} onBlur={e => this.onBlur(e)}>
-                <Label
-                    labelAttributes={{
-                        role: 'tooltip',
-                        tabIndex: '0',
-                        'aria-describedby': `#${this.identifier}`,
-                        onFocus: () => this.show(),
-                    }}
-                    isHidden={isHidden}
-                    requestHide={() => this.hide()}
-                    requestShow={() => this.show()}
-                    requestToggle={() => this.toggle()}
-                />
-                <Overlay
-                    overlayAttributes={{
-                        tabIndex: '-1',
-                        id: this.identifier,
-                        'aria-hidden': this.state.isHidden,
-                    }}
-                    isHidden={isHidden}
-                    requestHide={() => this.hide()}
-                    requestShow={() => this.show()}
-                    requestToggle={() => this.toggle()}
-                />
+                <Label {...labelProps} />
+                <Overlay {...overlayProps} />
             </div>
         );
     }
