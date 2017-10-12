@@ -4,38 +4,38 @@ import React from 'react';
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import Tooltip from './Tooltip';
+import { Tooltip, type LabelProps, type OverlayProps } from './';
 
 describe('<Tooltip />', () => {
     const HIDDEN_CLASS = 'HIDDEN_CLASS';
     const LABEL_CLASS = 'LABEL_CLASS';
     const OVERLAY_CLASS = 'OVERLAY_CLASS';
 
-    const Label = ({ isHidden, labelAttributes }) => {
-        return (
-            <div
-                className={classnames(LABEL_CLASS, {
-                    [HIDDEN_CLASS]: isHidden,
-                })}
-                {...labelAttributes}
-            />
-        );
-    };
+    const Label = ({ isHidden, labelAttributes }: LabelProps) => (
+        <div
+            className={classnames(LABEL_CLASS, {
+                [HIDDEN_CLASS]: isHidden,
+            })}
+            {...labelAttributes}
+        />
+    );
 
     const CloseButton = props => <button {...props} />;
 
-    const Overlay = ({ isHidden, requestHide, overlayAttributes }) => {
-        return (
-            <div
-                className={classnames(OVERLAY_CLASS, {
-                    [HIDDEN_CLASS]: isHidden,
-                })}
-                {...overlayAttributes}
-            >
-                <CloseButton onClick={requestHide}>close</CloseButton>
-            </div>
-        );
-    };
+    const Overlay = ({
+        isHidden,
+        requestHide,
+        overlayAttributes,
+    }: OverlayProps) => (
+        <div
+            className={classnames(OVERLAY_CLASS, {
+                [HIDDEN_CLASS]: isHidden,
+            })}
+            {...overlayAttributes}
+        >
+            <CloseButton onClick={requestHide}>close</CloseButton>
+        </div>
+    );
 
     let wrapper;
     let label;
