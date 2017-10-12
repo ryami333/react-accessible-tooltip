@@ -7,5 +7,6 @@
 [lints]
 
 [options]
-esproposal.class_static_fields=enable
-esproposal.class_instance_fields=enable
+module.name_mapper='.*\(.scss\)' -> 'empty/object'
+module.file_ext=.js
+module.file_ext=.scss
