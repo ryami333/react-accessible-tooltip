@@ -1,10 +1,11 @@
 # React Accessible Tooltip
 
+Try out the **interactive demo** [here](https://ryami333.github.io/react-accessible-tooltip/).
+
 React Accessible Tooltip is a component which lets you build accessible tooltips. It handles all the interactivity and accessibility stuff, but keeps out of the way so you can use whatever markup and styling you want.
 
 Basic usage requires you to pass 'label' and 'overlay' render functions. React Accessible Tooltip passes you both the state of the tooltip (`isHidden`) and an object full of properties you should spread across your components (`labelAttributes`, `overlayAttributes`).
 
-Try out the **interactive demo** [here](https://ryami333.github.io/react-accessible-tooltip/).
 
 ## Getting started
 
