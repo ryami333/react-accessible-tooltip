@@ -8,11 +8,11 @@ const config = {
     entry: (() => {
         if (process.env.NODE_ENV === 'production') {
             return {
-                'demo/main.js': ['./demo/main.js'],
+                'src/main.js': ['./src/main.js'],
             };
         }
         return {
-            'demo/main.js': ['react-hot-loader/patch', './demo/main.js'],
+            'src/main.js': ['./src/main.js'],
         };
     })(),
 
@@ -21,7 +21,7 @@ const config = {
 
         if (process.env.NODE_ENV === 'production') {
             output = Object.assign({}, output, {
-                path: path.resolve(__dirname, 'docs'),
+                path: path.resolve(__dirname, '../../docs'),
                 publicPath: '',
                 filename: '[name][chunkhash].js',
             });
@@ -40,9 +40,11 @@ const config = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules)/,
+                exclude: [
+                    /(node_modules)/,
+                    /(packages\/react-accessible-tooltip)/,
+                ],
                 use: [
-                    'react-hot-loader/webpack',
                     'babel-loader',
                     'eslint-loader',
                 ],
@@ -82,7 +84,7 @@ const config = {
         // Generate a root HTML file with a <script> appended to the <body> tag.
         let plugins = [
             new HtmlWebpackPlugin({
-                template: 'demo/index.html',
+                template: 'src/index.html',
                 inject: 'body',
             }),
         ];

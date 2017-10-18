@@ -1,4 +1,5 @@
 [ignore]
+.*/docs/*
 
 [include]
 
@@ -8,5 +9,6 @@
 
 [options]
 module.name_mapper='.*\(.scss\)' -> 'empty/object'
+
 module.file_ext=.js
 module.file_ext=.scss
