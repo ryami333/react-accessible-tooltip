@@ -4,7 +4,8 @@
   "description": "React utility component for building accessible tooltips.",
   "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
   "keywords": ["tooltip", "react", "component", "accessibility", "aria"],
-  "main": "dist/index.js",
+  "main": "dist/umd/index.js",
+  "jsnext:main": "dist/es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
@@ -48,11 +49,10 @@
     "rollup-plugin-replace": "^2.0.0"
   },
   "scripts": {
-    "build:dist:flow":
-      "NODE_ENV=production flow-copy-source src dist/ --ignore=*.test.js",
-    "build:dist:rollup": "NODE_ENV=production rollup -c",
-    "build:dist": "yarn build:dist:rollup && yarn build:dist:flow",
-    "build": "rm -rf dist/ && yarn build:dist",
+    "build:flow":
+      "flow-copy-source src --ignore=*.test.js",
+    "build:rollup": "NODE_ENV=production rollup -c",
+    "build": "rm -rf dist/ && yarn build:rollup && yarn build:flow dist/es && build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src"

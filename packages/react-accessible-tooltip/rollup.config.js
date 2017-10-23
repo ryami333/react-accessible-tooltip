@@ -10,7 +10,10 @@ export default [
     {
         entry: 'src/index.js',
         external: ['react'],
-        targets: [{ dest: pkg.main, format: 'umd' }],
+        targets: [
+            { dest: pkg.main, format: 'umd' },
+            { dest: pkg['jsnext:main'], format: 'es' },
+        ],
         moduleName: 'reactAccessibleTooltip',
         plugins: [
             resolve({
