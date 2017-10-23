@@ -57,7 +57,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "react": "^15.6.1",
-    "react-accessible-tooltip": "1.2.15",
+    "react-accessible-tooltip": "1.2.16",
     "react-dom": "^15.6.1"
   }
 }
