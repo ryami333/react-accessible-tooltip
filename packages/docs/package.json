@@ -49,7 +49,8 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "rm -rf ../../docs && NODE_ENV=production webpack",
+    "build": "rm -rf dist && NODE_ENV=production webpack",
+    "deploy": "yarn build && cd ../..; git subtree push --prefix packages/docs/dist origin gh-pages",
     "test": "jest src",
     "lint": "eslint src"
   },
