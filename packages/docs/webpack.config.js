@@ -21,7 +21,7 @@ const config = {
 
         if (process.env.NODE_ENV === 'production') {
             output = Object.assign({}, output, {
-                path: path.resolve(__dirname, '../../docs'),
+                path: path.resolve(__dirname, 'dist'),
                 publicPath: '',
                 filename: '[name][chunkhash].js',
             });
