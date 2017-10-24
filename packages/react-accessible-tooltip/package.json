@@ -17,7 +17,7 @@
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^21.0.2",
