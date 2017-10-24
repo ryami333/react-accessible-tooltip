@@ -59,7 +59,7 @@
   "scripts": {
     "build:flow": "flow-copy-source src --ignore=*.test.js",
     "build:rollup": "NODE_ENV=production rollup -c",
-    "build": "rm -rf dist/ && yarn build:rollup && yarn build:flow dist/es && build:flow dist/umd",
+    "build": "rm -rf dist/ && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src"
