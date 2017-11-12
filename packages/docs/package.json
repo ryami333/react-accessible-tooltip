@@ -9,7 +9,7 @@
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
   "browserslist": [
-    "> 1%",
+    "IE 11",
     "last 2 versions"
   ],
   "devDependencies": {
