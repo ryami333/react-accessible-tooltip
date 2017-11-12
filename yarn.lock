@@ -5509,12 +5509,6 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-accessible-tooltip@1.2.16:
-  version "1.2.16"
-  resolved "https://registry.yarnpkg.com/react-accessible-tooltip/-/react-accessible-tooltip-1.2.16.tgz#6163600bd5ce0493bbeddd85764e7ad26c220495"
-  dependencies:
-    classnames "^2.2.5"
-
 react-dom@^16.0.0:
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
