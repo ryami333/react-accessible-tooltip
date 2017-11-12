@@ -5,16 +5,12 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 
 const config = {
-    entry: (() => {
-        if (process.env.NODE_ENV === 'production') {
-            return {
-                'src/main.js': ['./src/main.js'],
-            };
-        }
-        return {
-            'src/main.js': ['./src/main.js'],
-        };
-    })(),
+    entry: {
+        'src/main.js': [
+            'babel-polyfill',
+            './src/main.js',
+        ],
+    },
 
     output: (() => {
         let output = {};
