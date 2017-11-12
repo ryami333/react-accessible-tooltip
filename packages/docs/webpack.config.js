@@ -55,12 +55,7 @@ const config = {
                         options: {
                             plugins() {
                                 return [
-                                    autoprefixer({
-                                        browsers: [
-                                            'last 2 versions',
-                                            'ie >= 10',
-                                        ],
-                                    }),
+                                    autoprefixer,
                                     cssnano,
                                 ];
                             },
