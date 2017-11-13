@@ -18,8 +18,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//      
-
 var counter = 0;
 
 var Tooltip = function (_Component) {
@@ -57,10 +55,13 @@ var Tooltip = function (_Component) {
             var relatedTarget = _ref.relatedTarget,
                 currentTarget = _ref.currentTarget;
 
+            // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
+            var newTarget = relatedTarget || document.activeElement;
+
             // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
-            if (!(relatedTarget && relatedTarget instanceof HTMLElement)) {
+            if (!(newTarget && newTarget instanceof HTMLElement)) {
                 this.hide();
-            } else if (!currentTarget.contains(relatedTarget)) {
+            } else if (!currentTarget.contains(newTarget)) {
                 this.hide();
             }
         }
@@ -115,10 +116,6 @@ var Tooltip = function (_Component) {
 
     return Tooltip;
 }(React.Component);
-
-//      
-
-// eslint-disable-next-line import/prefer-default-export
 
 exports.Tooltip = Tooltip;
 

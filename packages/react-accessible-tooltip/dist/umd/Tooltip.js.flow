@@ -51,10 +51,13 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     };
 
     onBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLElement>) {
+        // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
+        const newTarget = relatedTarget || document.activeElement;
+
         // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
-        if (!(relatedTarget && relatedTarget instanceof HTMLElement)) {
+        if (!(newTarget && newTarget instanceof HTMLElement)) {
             this.hide();
-        } else if (!currentTarget.contains(relatedTarget)) {
+        } else if (!currentTarget.contains(newTarget)) {
             this.hide();
         }
     }
