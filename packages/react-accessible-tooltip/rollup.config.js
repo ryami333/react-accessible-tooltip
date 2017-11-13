@@ -7,13 +7,13 @@ import pkg from './package.json';
 
 export default [
     {
-        entry: 'src/index.js',
+        input: 'src/index.js',
         external: ['react'],
-        targets: [
-            { dest: pkg.main, format: 'umd' },
-            { dest: pkg['jsnext:main'], format: 'es' },
+        output: [
+            { file: pkg.main, format: 'umd' },
+            { file: pkg['jsnext:main'], format: 'es' },
         ],
-        moduleName: 'reactAccessibleTooltip',
+        name: 'reactAccessibleTooltip',
         plugins: [
             resolve({
                 jsnext: true,
