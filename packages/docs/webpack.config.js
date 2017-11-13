@@ -12,25 +12,15 @@ const config = {
         ],
     },
 
-    output: (() => {
-        let output = {};
-
-        if (process.env.NODE_ENV === 'production') {
-            output = Object.assign({}, output, {
-                path: path.resolve(__dirname, 'dist'),
-                publicPath: '',
-                filename: '[name][chunkhash].js',
-            });
-        } else {
-            output = Object.assign({}, output, {
-                path: '/',
-                publicPath: 'http://localhost:3000/',
-                filename: '[name]',
-            });
+    output: process.env.NODE_ENV === 'production'
+        ? {
+            path: path.resolve(__dirname, 'dist'),
+            filename: '[name][chunkhash].js',
         }
-
-        return output;
-    })(),
+        : {
+            path: '/',
+            filename: '[name]',
+        },
 
     module: {
         rules: [
