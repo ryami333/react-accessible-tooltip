@@ -27,6 +27,7 @@
     "babel-preset-jest": "^21.2.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "classnames": "^2.2.5",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.2",
     "enzyme-to-json": "^3.1.4",
@@ -69,9 +70,6 @@
   "peerDependencies": {
     "react": "^15.6.1 || ^16.0.0",
     "react-dom": "^15.6.1 || ^16.0.0"
-  },
-  "dependencies": {
-    "classnames": "^2.2.5"
   },
   "jest": {
     "setupFiles": [
