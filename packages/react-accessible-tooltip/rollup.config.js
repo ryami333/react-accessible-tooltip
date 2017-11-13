@@ -3,7 +3,6 @@ import eslint from 'rollup-plugin-eslint';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import replace from 'rollup-plugin-replace';
-import flow from 'rollup-plugin-flow';
 import pkg from './package.json';
 
 export default [
@@ -21,10 +20,9 @@ export default [
                 main: true,
                 browser: true,
             }),
-            commonjs(),
             eslint(),
-            flow(),
             babel(),
+            commonjs(),
             replace({
                 exclude: 'node_modules/**',
                 ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
