@@ -1,12 +1,13 @@
 // @flow
 
-import React from 'react';
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import { Tooltip, type LabelProps, type OverlayProps } from './';
+import React16 from 'react-16';
+import React15 from 'react-15';
+import { type LabelProps, type OverlayProps } from './';
 
-describe('<Tooltip />', () => {
+function testReact(React, Tooltip) {
     const HIDDEN_CLASS = 'HIDDEN_CLASS';
     const LABEL_CLASS = 'LABEL_CLASS';
     const OVERLAY_CLASS = 'OVERLAY_CLASS';
@@ -50,7 +51,7 @@ describe('<Tooltip />', () => {
         closeButton = wrapper.find(CloseButton);
     });
 
-    it('matches the previous snapshot', () => {
+    it(`${React.version} - asdmatches the previous snapshot`, () => {
         expect(toJson(wrapper)).toMatchSnapshot();
     });
 
@@ -81,5 +82,21 @@ describe('<Tooltip />', () => {
 
         closeButton.simulate('click');
         expect(wrapper.state('isHidden')).toBeTruthy();
+    });
+}
+
+describe('<Tooltip />', () => {
+    describe('React 16', () => {
+        jest.resetModules();
+        jest.doMock('react', () => React16);
+        const { Tooltip } = require('./');
+        testReact(React16, Tooltip);
+    });
+
+    describe('React 15', () => {
+        jest.resetModules();
+        jest.doMock('react', () => React15);
+        const { Tooltip } = require('./');
+        testReact(React15, Tooltip);
     });
 });
