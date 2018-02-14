@@ -75,5 +75,9 @@
     "setupFiles": [
       "./src/setupTests.js"
     ]
+  },
+  "dependencies": {
+    "react-15": "npm:react@15.6.1",
+    "react-16": "npm:react@16.2.0"
   }
 }

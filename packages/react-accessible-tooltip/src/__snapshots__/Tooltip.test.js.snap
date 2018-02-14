@@ -1,6 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Tooltip /> matches the previous snapshot 1`] = `
+exports[`<Tooltip /> React 15 15.6.1 - asdmatches the previous snapshot 1`] = `
+<Tooltip
+  label={[Function]}
+  overlay={[Function]}
+>
+  <div
+    onBlur={[Function]}
+  >
+    <Label
+      isHidden={true}
+      labelAttributes={
+        Object {
+          "aria-describedby": "#react-accessible-tooltip-0",
+          "onFocus": [Function],
+          "role": "tooltip",
+          "tabIndex": "0",
+        }
+      }
+      requestHide={[Function]}
+      requestShow={[Function]}
+      requestToggle={[Function]}
+    >
+      <div
+        aria-describedby="#react-accessible-tooltip-0"
+        className="LABEL_CLASS HIDDEN_CLASS"
+        onFocus={[Function]}
+        role="tooltip"
+        tabIndex="0"
+      />
+    </Label>
+    <Overlay
+      isHidden={true}
+      overlayAttributes={
+        Object {
+          "aria-hidden": true,
+          "id": "react-accessible-tooltip-0",
+          "tabIndex": "-1",
+        }
+      }
+      requestHide={[Function]}
+      requestShow={[Function]}
+      requestToggle={[Function]}
+    >
+      <div
+        aria-hidden={true}
+        className="OVERLAY_CLASS HIDDEN_CLASS"
+        id="react-accessible-tooltip-0"
+        tabIndex="-1"
+      >
+        <CloseButton
+          onClick={[Function]}
+        >
+          <button
+            onClick={[Function]}
+          >
+            close
+          </button>
+        </CloseButton>
+      </div>
+    </Overlay>
+  </div>
+</Tooltip>
+`;
+
+exports[`<Tooltip /> React 16 16.2.0 - asdmatches the previous snapshot 1`] = `
 <Tooltip
   label={[Function]}
   overlay={[Function]}
