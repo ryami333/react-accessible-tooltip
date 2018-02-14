@@ -47,7 +47,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo
-      - run: yarn workspace test
+      - run: yarn workspace react-accessible-tooltip test
 
   lint-job:
     docker:
@@ -59,7 +59,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo
-      - run: yarn workspace lint
+      - run: yarn workspace react-accessible-tooltip lint
 
   build-job:
     docker:
@@ -71,7 +71,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/repo
-      - run: yarn build
+      - run: yarn workspace react-accessible-tooltip build
       - persist_to_workspace:
           root: ~/repo
           paths:
