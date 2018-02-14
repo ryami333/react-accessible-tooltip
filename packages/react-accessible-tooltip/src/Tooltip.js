@@ -117,7 +117,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                 {...rest}
                 onBlur={e => this.onBlur(e)}
                 ref={ref => {
-                    containerRef && containerRef(ref);
+                    if (containerRef) {
+                        containerRef(ref);
+                    }
                 }}
             >
                 <Label {...labelProps} />
