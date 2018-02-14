@@ -1,0 +1,115 @@
+version: 2
+jobs:
+  install-job:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules/*
+
+
+  deploy-job:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo/packages/react-accessible-tooltip
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run: npm publish
+
+  test-job:
+    docker:
+      - image: circleci/node:9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn workspace test
+
+  lint-job:
+    docker:
+      - image: circleci/node:9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn workspace lint
+
+  build-job:
+    docker:
+      - image: circleci/node:9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - dist/*
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - install-job:
+          filters:
+            tags:
+              only: /.*/
+      - build-job:
+          requires:
+            - install-job
+          filters:
+            tags:
+              only: /.*/
+      - test-job:
+          requires:
+            - install-job
+          filters:
+            tags:
+              only: /.*/
+      - lint-job:
+          requires:
+            - install-job
+          filters:
+            tags:
+              only: /.*/
+      - deploy-job:
+          requires:
+            - lint-job
+            - test-job
+            - build-job
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
