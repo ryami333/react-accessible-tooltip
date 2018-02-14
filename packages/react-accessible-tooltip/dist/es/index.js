@@ -67,7 +67,8 @@ var Tooltip = function (_Component) {
             var _props = this.props,
                 Label = _props.label,
                 Overlay = _props.overlay,
-                rest = _objectWithoutProperties(_props, ['label', 'overlay']);
+                containerRef = _props.containerRef,
+                rest = _objectWithoutProperties(_props, ['label', 'overlay', 'containerRef']);
 
             var isHidden = this.state.isHidden;
 
@@ -99,9 +100,16 @@ var Tooltip = function (_Component) {
 
             return React.createElement(
                 'div',
-                _extends({}, rest, { onBlur: function onBlur(e) {
+                _extends({}, rest, {
+                    onBlur: function onBlur(e) {
                         return _this2.onBlur(e);
-                    } }),
+                    },
+                    ref: function ref(_ref2) {
+                        if (containerRef) {
+                            containerRef(_ref2);
+                        }
+                    }
+                }),
                 React.createElement(Label, labelProps),
                 React.createElement(Overlay, overlayProps)
             );
