@@ -78,7 +78,12 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     identifier: string;
 
     render() {
-        const { label: Label, overlay: Overlay, containerRef, ...rest } = this.props;
+        const {
+            label: Label,
+            overlay: Overlay,
+            containerRef,
+            ...rest
+        } = this.props;
 
         const { isHidden } = this.state;
 
@@ -108,7 +113,13 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         };
 
         return (
-            <div {...rest} onBlur={e => this.onBlur(e)} ref={ref => { containerRef && containerRef(ref); }}>
+            <div
+                {...rest}
+                onBlur={e => this.onBlur(e)}
+                ref={ref => {
+                    containerRef && containerRef(ref);
+                }}
+            >
                 <Label {...labelProps} />
                 <Overlay {...overlayProps} />
             </div>
