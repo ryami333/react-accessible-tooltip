@@ -83,6 +83,15 @@ function testReact(React, Tooltip) {
         closeButton.simulate('click');
         expect(wrapper.state('isHidden')).toBeTruthy();
     });
+
+    it('respects the containerRef prop', () => {
+        const containerRef = jest.fn();
+
+        wrapper = mount(<Tooltip label={Label} overlay={Overlay} containerRef={containerRef} />);
+
+        expect(containerRef.mock.calls.length).toEqual(1);
+        expect(containerRef.mock.calls[0][0]).toBeInstanceOf(HTMLDivElement);
+    });
 }
 
 describe('<Tooltip />', () => {
@@ -98,5 +107,7 @@ describe('<Tooltip />', () => {
         jest.doMock('react', () => React15);
         const { Tooltip } = require('./');
         testReact(React15, Tooltip);
+
+
     });
 });
