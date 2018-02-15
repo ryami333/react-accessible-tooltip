@@ -31,7 +31,7 @@ jobs:
     working_directory: ~/repo/packages/react-accessible-tooltip
     steps:
       - checkout:
-        - path: ~/repo
+          path: ~/repo
       - attach_workspace:
           at: ~/repo
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
