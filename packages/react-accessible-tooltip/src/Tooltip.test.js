@@ -3,7 +3,9 @@
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
+// $FlowFixMe
 import React16 from 'react-16';
+// $FlowFixMe
 import React15 from 'react-15';
 import { type LabelProps, type OverlayProps } from './';
 
@@ -104,6 +106,7 @@ describe('<Tooltip />', () => {
     describe('React 16', () => {
         jest.resetModules();
         jest.doMock('react', () => React16);
+        // eslint-disable-next-line global-require
         const { Tooltip } = require('./');
         testReact(React16, Tooltip);
     });
@@ -111,6 +114,7 @@ describe('<Tooltip />', () => {
     describe('React 15', () => {
         jest.resetModules();
         jest.doMock('react', () => React15);
+        // eslint-disable-next-line global-require
         const { Tooltip } = require('./');
         testReact(React15, Tooltip);
     });
