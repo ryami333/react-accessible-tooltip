@@ -9,15 +9,15 @@ jobs:
 
       - restore_cache:
           keys:
-            - node-modules-{{ checksum "web-app/yarn.lock" }}
+            - node-modules-{{ checksum "yarn.lock" }}
             - node-modules-
 
       - run: yarn install
 
       - save_cache:
-          key: node-modules-{{ checksum "web-app/yarn.lock" }}
+          key: node-modules-{{ checksum "yarn.lock" }}
           paths:
-            - web-app/node_modules
+            - node_modules
             - ~/.cache/yarn
       - persist_to_workspace:
           root: ~/repo
