@@ -28,11 +28,11 @@ jobs:
   deploy-job:
     docker:
       - image: circleci/node:9
-    working_directory: ~/repo
+    working_directory: ~/repo/packages/react-accessible-tooltip
     steps:
       - checkout
       - attach_workspace:
-          at: ~/repo/packages/react-accessible-tooltip
+          at: ~/repo
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm publish
 
