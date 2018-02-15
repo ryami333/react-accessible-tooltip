@@ -18,12 +18,7 @@
     "rules": {
         "flowtype-errors/show-errors": 2,
         "react/jsx-filename-extension": ["off", { "extensions": [".js", ".jsx"] }],
-        "prettier/prettier": ["error", {
-            "tabWidth": 4,
-            "singleQuote": true,
-            "trailingComma": "all",
-            "parser": "flow"
-        }]
+        "prettier/prettier": "error"
     },
     "env": {
         "es6": true,
