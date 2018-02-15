@@ -74,7 +74,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - dist/*
+            - packages/react-accessible-tooltip/dist/*
 
 workflows:
   version: 2
