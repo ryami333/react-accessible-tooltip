@@ -3,10 +3,14 @@
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
+import { Simulate } from 'react-dom/test-utils';
+import ReactDOM from 'react-dom';
+
 // $FlowFixMe
 import React16 from 'react-16';
 // $FlowFixMe
 import React15 from 'react-15';
+
 import { type LabelProps, type OverlayProps } from './';
 
 function testReact(React, Tooltip) {
@@ -53,52 +57,112 @@ function testReact(React, Tooltip) {
         closeButton = wrapper.find(CloseButton);
     });
 
-    it(`${React.version} - asdmatches the previous snapshot`, () => {
-        expect(toJson(wrapper)).toMatchSnapshot();
-    });
+    describe(`${React.version} -`, () => {
+        it('matches the previous snapshot', () => {
+            expect(toJson(wrapper)).toMatchSnapshot();
+        });
 
-    it("increments the overlay's `id` attribute with each instance.", () => {
-        expect(overlay.find('div').prop('id')).toEqual(
-            'react-accessible-tooltip-1', // as opposed to `react-accessible-tooltip-0`
-        );
-    });
+        it("increments the overlay's `id` attribute with each instance.", () => {
+            expect(overlay.find('div').prop('id')).toEqual(
+                'react-accessible-tooltip-1', // as opposed to `react-accessible-tooltip-0`
+            );
+        });
 
-    it('hides the overlay by default', () => {
-        expect(wrapper.state('isHidden')).toBeTruthy();
-    });
+        it('hides the overlay by default', () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
 
-    it('reveals the overlay when the label is focussed, and hides the overlay when the whole tooltip is blurred.', () => {
-        label.simulate('focus');
-        expect(wrapper.state('isHidden')).toBeFalsy();
+        it('reveals the overlay when the label is focussed, and hides the overlay when the whole tooltip is blurred.', () => {
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
 
-        overlay.simulate('focus');
-        expect(wrapper.state('isHidden')).toBeFalsy();
+            overlay.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
 
-        label.simulate('blur');
-        expect(wrapper.state('isHidden')).toBeTruthy();
-    });
+            label.simulate('blur');
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
 
-    it('respects a manual close request', () => {
-        label.simulate('focus');
-        expect(wrapper.state('isHidden')).toBeFalsy();
+        it('respects a manual close request', () => {
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
 
-        closeButton.simulate('click');
-        expect(wrapper.state('isHidden')).toBeTruthy();
-    });
+            closeButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
 
-    it('respects the containerRef prop', () => {
-        const containerRef = jest.fn();
+        it('respects the containerRef prop', () => {
+            const containerRef = jest.fn();
 
-        wrapper = mount(
-            <Tooltip
-                label={Label}
-                overlay={Overlay}
-                containerRef={containerRef}
-            />,
-        );
+            wrapper = mount(
+                <Tooltip
+                    label={Label}
+                    overlay={Overlay}
+                    containerRef={containerRef}
+                />,
+            );
 
-        expect(containerRef.mock.calls.length).toEqual(1);
-        expect(containerRef.mock.calls[0][0]).toBeInstanceOf(HTMLDivElement);
+            wrapper.simulate('touchStart', {
+                type: 'touchstart',
+                x: 0,
+                y: 0,
+            });
+
+            expect(containerRef.mock.calls.length).toEqual(1);
+            expect(containerRef.mock.calls[0][0]).toBeInstanceOf(
+                HTMLDivElement,
+            );
+        });
+
+        describe('touch devices -', () => {
+            // let containerRef;
+            let labelRef;
+            let overlayRef;
+
+            beforeAll(() => {
+                const testRoot = document.createElement('div');
+                ReactDOM.render(
+                    <div
+                    // ref={_containerRef => {
+                    //     containerRef = _containerRef;
+                    // }}
+                    >
+                        <Tooltip
+                            label={({ labelAttributes }) => (
+                                <div
+                                    {...labelAttributes}
+                                    ref={_labelRef => {
+                                        labelRef = _labelRef;
+                                    }}
+                                />
+                            )}
+                            overlay={({ overlayAttributes }) => (
+                                <div
+                                    {...overlayAttributes}
+                                    ref={_overlayRef => {
+                                        overlayRef = _overlayRef;
+                                    }}
+                                />
+                            )}
+                        />
+                    </div>,
+                    testRoot,
+                );
+            });
+
+            it('opens on focus', () => {
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
+                Simulate.focus(labelRef);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+            });
+
+            it('closes on touch-away', () => {
+                const testEvent = new Event('touchstart', { bubbles: true });
+                // $FlowFixMe
+                document.body.dispatchEvent(testEvent);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
+            });
+        });
     });
 }
 
