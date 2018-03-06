@@ -51,7 +51,18 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         isHidden: true,
     };
 
-    onBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLElement>) {
+    componentDidMount() {
+        document.addEventListener('touchstart', this.handleTouch);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('touchstart', this.handleTouch);
+    }
+
+    onBlur = ({
+        relatedTarget,
+        currentTarget,
+    }: SyntheticFocusEvent<HTMLElement>) => {
         // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
         const newTarget = relatedTarget || document.activeElement;
 
@@ -61,20 +72,37 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         } else if (!currentTarget.contains(newTarget)) {
             this.hide();
         }
-    }
+    };
 
-    hide = (): void => {
+    // This handles the support for touch devices that do not trigger blur on 'touch-away'.
+    handleTouch = ({ target }: Event) => {
+        const { activeElement } = document;
+
+        if (!(activeElement instanceof Element) || !(target instanceof Element))
+            return;
+
+        if (
+            this.container instanceof Element &&
+            !this.container.contains(target) && // touch target not a tooltip descendent
+            !this.state.isHidden // prevent redundant state change
+        ) {
+            this.hide();
+        }
+    };
+
+    hide = () => {
         this.setState({ isHidden: true });
     };
 
-    show = (): void => {
+    show = () => {
         this.setState({ isHidden: false });
     };
 
-    toggle = (): void => {
+    toggle = () => {
         this.setState({ isHidden: !this.state.isHidden });
     };
 
+    container: ?HTMLDivElement;
     identifier: string;
 
     render() {
@@ -115,8 +143,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         return (
             <div
                 {...rest}
-                onBlur={e => this.onBlur(e)}
+                onBlur={this.onBlur}
                 ref={ref => {
+                    this.container = ref;
                     if (containerRef) {
                         containerRef(ref);
                     }
