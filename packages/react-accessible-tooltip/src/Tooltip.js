@@ -51,7 +51,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         isHidden: true,
     };
 
-    onBlur({ relatedTarget, currentTarget }: SyntheticFocusEvent<HTMLElement>) {
+    onBlur = ({
+        relatedTarget,
+        currentTarget,
+    }: SyntheticFocusEvent<HTMLElement>): void => {
         // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
         const newTarget = relatedTarget || document.activeElement;
 
@@ -61,7 +64,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         } else if (!currentTarget.contains(newTarget)) {
             this.hide();
         }
-    }
+    };
 
     hide = (): void => {
         this.setState({ isHidden: true });
@@ -115,7 +118,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         return (
             <div
                 {...rest}
-                onBlur={e => this.onBlur(e)}
+                onBlur={this.onBlur}
                 ref={ref => {
                     if (containerRef) {
                         containerRef(ref);
