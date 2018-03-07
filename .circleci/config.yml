@@ -25,18 +25,6 @@ jobs:
             - node_modules/*
             - packages/*/node_modules/*
 
-  deploy-job:
-    docker:
-      - image: circleci/node:9
-    working_directory: ~/repo/packages/react-accessible-tooltip
-    steps:
-      - checkout:
-          path: ~/repo
-      - attach_workspace:
-          at: ~/repo
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: npm publish
-
   test-job:
     docker:
       - image: circleci/node:9
@@ -75,7 +63,19 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - packages/react-accessible-tooltip/dist/*
+            - ~/repo/packages/react-accessible-tooltip/dist/*
+
+  deploy-job:
+    docker:
+      - image: circleci/node:9
+    working_directory: ~/repo/packages/react-accessible-tooltip
+    steps:
+      - checkout:
+          path: ~/repo
+      - attach_workspace:
+          at: ~/repo
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run: npm publish
 
 workflows:
   version: 2
