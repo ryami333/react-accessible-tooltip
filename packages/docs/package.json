@@ -8,10 +8,7 @@
     "type": "git",
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
-  "browserslist": [
-    "IE 11",
-    "last 2 versions"
-  ],
+  "browserslist": ["IE 11", "last 2 versions"],
   "devDependencies": {
     "autoprefixer": "^7.1.4",
     "babel": "^6.23.0",
@@ -53,8 +50,14 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "rm -rf dist && NODE_ENV=production webpack",
-    "deploy": "yarn build && cd ../..; git subtree push --prefix packages/docs/dist origin gh-pages",
+    "build:clean": "rm -rf dist/",
+    "build:webpack": "NODE_ENV=production webpack",
+    "build:react-accessible-tooltip":
+      "yarn workspace react-accessible-tooltip build",
+    "build":
+      "yarn build:clean && yarn build:react-accessible-tooltip && yarn build:webpack",
+    "deploy":
+      "yarn build && cd ../..; git subtree push --prefix packages/docs/dist origin gh-pages",
     "test": "jest src",
     "lint": "eslint src"
   },
