@@ -43,6 +43,7 @@
     "prettier": "^1.6.1",
     "raw-loader": "^0.5.1",
     "react-test-renderer": "^16.0.0",
+    "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
     "webpack": "^3.8.1",
@@ -50,7 +51,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server",
-    "build:clean": "rm -rf dist/",
+    "build:clean": "rimraf \"dist/**/*\"",
     "build:webpack": "NODE_ENV=production webpack",
     "build:react-accessible-tooltip":
       "yarn workspace react-accessible-tooltip build",
