@@ -43,6 +43,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-test-renderer": "^16.2.0",
+    "rimraf": "^2.6.2",
     "rollup": "^0.56.4",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^9.0.0",
@@ -53,8 +54,9 @@
   "scripts": {
     "build:flow": "flow-copy-source src --ignore=*.test.js",
     "build:rollup": "NODE_ENV=production rollup -c",
+    "build:clean": "rimraf \"dist/**/*\"",
     "build":
-      "rm -rf dist/ && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
+      "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src"
