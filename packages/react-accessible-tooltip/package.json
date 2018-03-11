@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-tooltip",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "React utility component for building accessible tooltips.",
   "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
   "keywords": ["tooltip", "react", "component", "accessibility", "aria"],
