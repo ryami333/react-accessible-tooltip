@@ -165,6 +165,15 @@ function testReact(React, Tooltip) {
                 expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
             });
 
+            it("doesn't close when descendant element touched", () => {
+                Simulate.focus(labelRef);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                const testEvent = new Event('touchstart', { bubbles: true });
+                // $FlowFixMe;
+                overlayRef.dispatchEvent(testEvent);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+            });
+
             it('successfully unmounts without crashing', () => {
                 wrapper.unmount();
             });
