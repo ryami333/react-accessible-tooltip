@@ -121,12 +121,6 @@ function testReact(React, Tooltip) {
                 />,
             );
 
-            wrapper.simulate('touchStart', {
-                type: 'touchstart',
-                x: 0,
-                y: 0,
-            });
-
             expect(containerRef.mock.calls.length).toEqual(1);
             expect(containerRef.mock.calls[0][0]).toBeInstanceOf(
                 HTMLDivElement,
