@@ -157,6 +157,8 @@ function testReact(React, Tooltip) {
             });
 
             it('closes on touch-away', () => {
+                Simulate.focus(labelRef);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe
                 document.body.dispatchEvent(testEvent);
