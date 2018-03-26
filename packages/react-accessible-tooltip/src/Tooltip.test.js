@@ -100,7 +100,7 @@ function testReact(React, Tooltip) {
             expect(wrapper.state('isHidden')).toBeTruthy();
             label.simulate('focus');
             expect(wrapper.state('isHidden')).toBeFalsy();
-            label.simulate('blur', { relatedTarget: 'notAnElement' });
+            label.simulate('blur', { relatedTarget: document.body });
             expect(wrapper.state('isHidden')).toBeTruthy();
         });
 
@@ -108,7 +108,7 @@ function testReact(React, Tooltip) {
             expect(wrapper.state('isHidden')).toBeTruthy();
             label.simulate('focus');
             expect(wrapper.state('isHidden')).toBeFalsy();
-            overlay.simulate('focus');
+            label.simulate('blur', { relatedTarget: overlay.getDOMNode() });
             expect(wrapper.state('isHidden')).toBeFalsy();
         });
 
