@@ -77,10 +77,25 @@ jobs:
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run: npm publish
 
+  coverage-job:
+    docker:
+      - image: circleci/node:9
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn workspace react-accessible-tooltip coverage
+
 workflows:
   version: 2
   build-deploy:
     jobs:
+      - coverage-job:
+          requires:
+            - install-job
       - install-job:
           filters:
             tags:
