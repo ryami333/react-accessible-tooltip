@@ -28,10 +28,14 @@ function testReact(React, Tooltip) {
     );
 
     const CloseButton = props => <button {...props} />;
+    const ToggleButton = props => <button {...props} />;
+    const ShowButton = props => <button {...props} />;
 
     const Overlay = ({
         isHidden,
         requestHide,
+        requestToggle,
+        requestShow,
         overlayAttributes,
     }: OverlayProps) => (
         <div
@@ -41,6 +45,8 @@ function testReact(React, Tooltip) {
             {...overlayAttributes}
         >
             <CloseButton onClick={requestHide}>close</CloseButton>
+            <ToggleButton onClick={requestToggle}>toggle</ToggleButton>
+            <ShowButton onClick={requestShow}>toggle</ShowButton>
         </div>
     );
 
@@ -48,6 +54,8 @@ function testReact(React, Tooltip) {
     let label;
     let overlay;
     let closeButton;
+    let toggleButton;
+    let showButton;
 
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
@@ -55,6 +63,8 @@ function testReact(React, Tooltip) {
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
         closeButton = wrapper.find(CloseButton);
+        toggleButton = wrapper.find(ToggleButton);
+        showButton = wrapper.find(ShowButton);
     });
 
     describe(`${React.version} -`, () => {
@@ -72,15 +82,34 @@ function testReact(React, Tooltip) {
             expect(wrapper.state('isHidden')).toBeTruthy();
         });
 
-        it('reveals the overlay when the label is focussed, and hides the overlay when the whole tooltip is blurred.', () => {
+        it('reveals the overlay when the label is focussed', () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
             label.simulate('focus');
             expect(wrapper.state('isHidden')).toBeFalsy();
+        });
 
-            overlay.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-
-            label.simulate('blur');
+        it('hides the overlay when the whole tooltip is blurred (and focus changes to a non-recognisable target)', () => {
             expect(wrapper.state('isHidden')).toBeTruthy();
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            label.simulate('blur', { relatedTarget: 'notAnElement' });
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
+
+        it('hides the overlay when focus shifts to a target outside the tooltip', () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            label.simulate('blur', { relatedTarget: document.body });
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
+
+        it("doesn't hide the overlay when focus shifts to the tooltip overlay", () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            label.simulate('blur', { relatedTarget: overlay.getDOMNode() });
+            expect(wrapper.state('isHidden')).toBeFalsy();
         });
 
         it('respects a manual close request', () => {
@@ -89,6 +118,24 @@ function testReact(React, Tooltip) {
 
             closeButton.simulate('click');
             expect(wrapper.state('isHidden')).toBeTruthy();
+        });
+
+        it('respects a manual toggle request', () => {
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+
+            toggleButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            toggleButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+        });
+
+        it('respects a manual show request', () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            showButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            showButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
         });
 
         it('respects the containerRef prop', () => {
@@ -102,16 +149,14 @@ function testReact(React, Tooltip) {
                 />,
             );
 
-            wrapper.simulate('touchStart', {
-                type: 'touchstart',
-                x: 0,
-                y: 0,
-            });
-
             expect(containerRef.mock.calls.length).toEqual(1);
             expect(containerRef.mock.calls[0][0]).toBeInstanceOf(
                 HTMLDivElement,
             );
+        });
+
+        it('respects a user-generated toggle', () => {
+            wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
         });
 
         describe('touch devices -', () => {
@@ -157,10 +202,36 @@ function testReact(React, Tooltip) {
             });
 
             it('closes on touch-away', () => {
+                Simulate.focus(labelRef);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe
                 document.body.dispatchEvent(testEvent);
                 expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
+            });
+
+            it("doesn't close when descendant element touched", () => {
+                Simulate.focus(labelRef);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                const testEvent = new Event('touchstart', { bubbles: true });
+                // $FlowFixMe;
+                overlayRef.dispatchEvent(testEvent);
+                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+            });
+
+            it('successfully unmounts without crashing', () => {
+                wrapper.unmount();
+            });
+
+            it('removes touch event listeners on unmount', () => {
+                const removeEventListenerSpy = jest.spyOn(
+                    document,
+                    'removeEventListener',
+                );
+                wrapper.unmount();
+                expect(removeEventListenerSpy).toHaveBeenCalled();
+                removeEventListenerSpy.mockReset();
+                removeEventListenerSpy.mockRestore();
             });
         });
     });
