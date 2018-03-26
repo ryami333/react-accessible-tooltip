@@ -22,6 +22,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
+    "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
@@ -61,7 +62,9 @@
       "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "coverage":
+      "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
   },
   "files": ["dist"],
   "peerDependencies": {
