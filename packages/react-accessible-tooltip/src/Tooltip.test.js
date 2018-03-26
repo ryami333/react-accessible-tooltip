@@ -96,6 +96,14 @@ function testReact(React, Tooltip) {
             expect(wrapper.state('isHidden')).toBeTruthy();
         });
 
+        it("hides the overlay when focus shifts and there's no support for event.relatedTarget", () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            label.simulate('blur');
+            expect(wrapper.state('isHidden')).toBeTruthy();
+        });
+
         it('hides the overlay when focus shifts to a target outside the tooltip', () => {
             expect(wrapper.state('isHidden')).toBeTruthy();
             label.simulate('focus');

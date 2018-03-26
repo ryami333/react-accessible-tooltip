@@ -78,10 +78,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     handleTouch = ({ target }: Event) => {
         const { activeElement } = document;
 
-        if (!(activeElement instanceof Element) || !(target instanceof Element))
-            return;
-
         if (
+            activeElement instanceof Element &&
+            target instanceof Element &&
             this.container instanceof Element &&
             !this.container.contains(target) && // touch target not a tooltip descendent
             !this.state.isHidden // prevent redundant state change
