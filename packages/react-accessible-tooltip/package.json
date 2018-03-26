@@ -3,7 +3,13 @@
   "version": "1.5.4",
   "description": "React utility component for building accessible tooltips.",
   "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
-  "keywords": ["tooltip", "react", "component", "accessibility", "aria"],
+  "keywords": [
+    "tooltip",
+    "react",
+    "component",
+    "accessibility",
+    "aria"
+  ],
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/es/index.js",
   "repository": {
@@ -22,6 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "classnames": "^2.2.5",
+    "coveralls": "^3.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
@@ -57,18 +64,21 @@
     "build:flow": "flow-copy-source src --ignore=*.test.js",
     "build:rollup": "NODE_ENV=production rollup -c",
     "build:clean": "rimraf \"dist/**/*\"",
-    "build":
-      "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
+    "build": "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": "^15.6.1 || ^16.0.0",
     "react-dom": "^15.6.1 || ^16.0.0"
   },
   "jest": {
-    "setupFiles": ["./src/setupTests.js"]
+    "setupFiles": [
+      "./src/setupTests.js"
+    ]
   }
 }
