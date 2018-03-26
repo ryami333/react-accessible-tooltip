@@ -166,6 +166,17 @@ function testReact(React, Tooltip) {
             it('successfully unmounts without crashing', () => {
                 wrapper.unmount();
             });
+
+            it('removes touch event listeners on unmount', () => {
+                const removeEventListenerSpy = jest.spyOn(
+                    document,
+                    'removeEventListener',
+                );
+                wrapper.unmount();
+                expect(removeEventListenerSpy).toHaveBeenCalled();
+                removeEventListenerSpy.mockReset();
+                removeEventListenerSpy.mockRestore();
+            });
         });
     });
 }
