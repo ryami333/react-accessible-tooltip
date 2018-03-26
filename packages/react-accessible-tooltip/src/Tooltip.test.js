@@ -29,11 +29,13 @@ function testReact(React, Tooltip) {
 
     const CloseButton = props => <button {...props} />;
     const ToggleButton = props => <button {...props} />;
+    const ShowButton = props => <button {...props} />;
 
     const Overlay = ({
         isHidden,
         requestHide,
         requestToggle,
+        requestShow,
         overlayAttributes,
     }: OverlayProps) => (
         <div
@@ -44,6 +46,7 @@ function testReact(React, Tooltip) {
         >
             <CloseButton onClick={requestHide}>close</CloseButton>
             <ToggleButton onClick={requestToggle}>toggle</ToggleButton>
+            <ShowButton onClick={requestShow}>toggle</ShowButton>
         </div>
     );
 
@@ -52,6 +55,7 @@ function testReact(React, Tooltip) {
     let overlay;
     let closeButton;
     let toggleButton;
+    let showButton;
 
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
@@ -60,6 +64,7 @@ function testReact(React, Tooltip) {
         overlay = wrapper.find(Overlay);
         closeButton = wrapper.find(CloseButton);
         toggleButton = wrapper.find(ToggleButton);
+        showButton = wrapper.find(ShowButton);
     });
 
     describe(`${React.version} -`, () => {
@@ -122,6 +127,14 @@ function testReact(React, Tooltip) {
             toggleButton.simulate('click');
             expect(wrapper.state('isHidden')).toBeTruthy();
             toggleButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+        });
+
+        it('respects a manual show request', () => {
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            showButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+            showButton.simulate('click');
             expect(wrapper.state('isHidden')).toBeFalsy();
         });
 

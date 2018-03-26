@@ -67,6 +67,15 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
             toggle
           </button>
         </ToggleButton>
+        <ShowButton
+          onClick={[Function]}
+        >
+          <button
+            onClick={[Function]}
+          >
+            toggle
+          </button>
+        </ShowButton>
       </div>
     </Overlay>
   </div>
@@ -140,6 +149,15 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
             toggle
           </button>
         </ToggleButton>
+        <ShowButton
+          onClick={[Function]}
+        >
+          <button
+            onClick={[Function]}
+          >
+            toggle
+          </button>
+        </ShowButton>
       </div>
     </Overlay>
   </div>
