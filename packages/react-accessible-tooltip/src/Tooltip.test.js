@@ -162,6 +162,10 @@ function testReact(React, Tooltip) {
                 document.body.dispatchEvent(testEvent);
                 expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
             });
+
+            it('successfully unmounts without crashing', () => {
+                wrapper.unmount();
+            });
         });
     });
 }
