@@ -28,10 +28,12 @@ function testReact(React, Tooltip) {
     );
 
     const CloseButton = props => <button {...props} />;
+    const ToggleButton = props => <button {...props} />;
 
     const Overlay = ({
         isHidden,
         requestHide,
+        requestToggle,
         overlayAttributes,
     }: OverlayProps) => (
         <div
@@ -41,6 +43,7 @@ function testReact(React, Tooltip) {
             {...overlayAttributes}
         >
             <CloseButton onClick={requestHide}>close</CloseButton>
+            <ToggleButton onClick={requestToggle}>toggle</ToggleButton>
         </div>
     );
 
@@ -48,6 +51,7 @@ function testReact(React, Tooltip) {
     let label;
     let overlay;
     let closeButton;
+    let toggleButton;
 
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
@@ -55,6 +59,7 @@ function testReact(React, Tooltip) {
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
         closeButton = wrapper.find(CloseButton);
+        toggleButton = wrapper.find(ToggleButton);
     });
 
     describe(`${React.version} -`, () => {
@@ -110,6 +115,16 @@ function testReact(React, Tooltip) {
             expect(wrapper.state('isHidden')).toBeTruthy();
         });
 
+        it('respects a manual toggle request', () => {
+            label.simulate('focus');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+
+            toggleButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeTruthy();
+            toggleButton.simulate('click');
+            expect(wrapper.state('isHidden')).toBeFalsy();
+        });
+
         it('respects the containerRef prop', () => {
             const containerRef = jest.fn();
 
@@ -125,6 +140,10 @@ function testReact(React, Tooltip) {
             expect(containerRef.mock.calls[0][0]).toBeInstanceOf(
                 HTMLDivElement,
             );
+        });
+
+        it('respects a user-generated toggle', () => {
+            wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
         });
 
         describe('touch devices -', () => {
