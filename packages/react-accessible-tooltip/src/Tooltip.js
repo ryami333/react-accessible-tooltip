@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import type { ElementProps, ComponentType } from 'react';
 
-export type LabelProps = {|
+export type LabelProps = {
     labelAttributes: {
         role: 'tooltip',
         tabIndex: '0',
@@ -14,9 +14,9 @@ export type LabelProps = {|
     requestHide: () => void,
     requestShow: () => void,
     requestToggle: () => void,
-|};
+};
 
-export type OverlayProps = {|
+export type OverlayProps = {
     overlayAttributes: {
         tabIndex: '-1',
         id: string,
@@ -26,7 +26,7 @@ export type OverlayProps = {|
     requestHide: () => void,
     requestShow: () => void,
     requestToggle: () => void,
-|};
+};
 
 export type TooltipState = {
     isHidden: boolean,
