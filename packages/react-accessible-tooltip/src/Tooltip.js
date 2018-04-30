@@ -118,7 +118,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             labelAttributes: {
                 role: 'tooltip',
                 tabIndex: '0',
-                'aria-describedby': `#${this.identifier}`,
+                'aria-describedby': this.identifier,
                 onFocus: this.show,
             },
             isHidden,
