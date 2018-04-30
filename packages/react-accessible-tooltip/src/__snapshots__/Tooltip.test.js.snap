@@ -12,7 +12,7 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
       isHidden={true}
       labelAttributes={
         Object {
-          "aria-describedby": "#react-accessible-tooltip-0",
+          "aria-describedby": "react-accessible-tooltip-0",
           "onFocus": [Function],
           "role": "tooltip",
           "tabIndex": "0",
@@ -23,7 +23,7 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
       requestToggle={[Function]}
     >
       <div
-        aria-describedby="#react-accessible-tooltip-0"
+        aria-describedby="react-accessible-tooltip-0"
         className="LABEL_CLASS HIDDEN_CLASS"
         onFocus={[Function]}
         role="tooltip"
@@ -94,7 +94,7 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
       isHidden={true}
       labelAttributes={
         Object {
-          "aria-describedby": "#react-accessible-tooltip-0",
+          "aria-describedby": "react-accessible-tooltip-0",
           "onFocus": [Function],
           "role": "tooltip",
           "tabIndex": "0",
@@ -105,7 +105,7 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
       requestToggle={[Function]}
     >
       <div
-        aria-describedby="#react-accessible-tooltip-0"
+        aria-describedby="react-accessible-tooltip-0"
         className="LABEL_CLASS HIDDEN_CLASS"
         onFocus={[Function]}
         role="tooltip"
