@@ -241,6 +241,13 @@ function testReact(React, Tooltip) {
                 removeEventListenerSpy.mockReset();
                 removeEventListenerSpy.mockRestore();
             });
+
+            it('contains matching "aria-describedby" and "id" attributes', () => {
+                const id = wrapper
+                    .find('[aria-describedby]')
+                    .prop('aria-describedby');
+                expect(wrapper.find(`#${id}`).exists()).toBe(true);
+            });
         });
     });
 }
