@@ -1,9 +1,15 @@
 {
   "name": "react-accessible-tooltip",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "React utility component for building accessible tooltips.",
   "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
-  "keywords": ["tooltip", "react", "component", "accessibility", "aria"],
+  "keywords": [
+    "tooltip",
+    "react",
+    "component",
+    "accessibility",
+    "aria"
+  ],
   "main": "dist/umd/index.js",
   "jsnext:main": "dist/es/index.js",
   "repository": {
@@ -58,21 +64,26 @@
     "build:flow": "flow-copy-source src --ignore=*.test.js",
     "build:rollup": "NODE_ENV=production rollup -c",
     "build:clean": "rimraf \"dist/**/*\"",
-    "build":
-      "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
+    "build": "yarn build:clean && yarn build:rollup && yarn build:flow dist/es && yarn build:flow dist/umd",
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src",
-    "coverage":
-      "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
+    "coverage": "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "peerDependencies": {
     "react": "^15.6.1 || ^16.0.0",
     "react-dom": "^15.6.1 || ^16.0.0"
   },
   "jest": {
-    "setupFiles": ["./src/setupTests.js"],
-    "collectCoverageFrom": ["src/**/*.js", "!src/setupTests.js"]
+    "setupFiles": [
+      "./src/setupTests.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/setupTests.js"
+    ]
   }
 }
