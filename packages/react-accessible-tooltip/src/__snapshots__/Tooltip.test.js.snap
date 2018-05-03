@@ -7,6 +7,8 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
 >
   <div
     onBlur={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <Label
       isHidden={true}
@@ -18,9 +20,6 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
           "tabIndex": "0",
         }
       }
-      requestHide={[Function]}
-      requestShow={[Function]}
-      requestToggle={[Function]}
     >
       <div
         aria-describedby="react-accessible-tooltip-0"
@@ -39,9 +38,6 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
           "tabIndex": "-1",
         }
       }
-      requestHide={[Function]}
-      requestShow={[Function]}
-      requestToggle={[Function]}
     >
       <div
         aria-hidden={true}
@@ -49,33 +45,7 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
         id="react-accessible-tooltip-0"
         tabIndex="-1"
       >
-        <CloseButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            close
-          </button>
-        </CloseButton>
-        <ToggleButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            toggle
-          </button>
-        </ToggleButton>
-        <ShowButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            toggle
-          </button>
-        </ShowButton>
+        Hello world
       </div>
     </Overlay>
   </div>
@@ -89,6 +59,8 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
 >
   <div
     onBlur={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <Label
       isHidden={true}
@@ -100,9 +72,6 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
           "tabIndex": "0",
         }
       }
-      requestHide={[Function]}
-      requestShow={[Function]}
-      requestToggle={[Function]}
     >
       <div
         aria-describedby="react-accessible-tooltip-0"
@@ -121,9 +90,6 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
           "tabIndex": "-1",
         }
       }
-      requestHide={[Function]}
-      requestShow={[Function]}
-      requestToggle={[Function]}
     >
       <div
         aria-hidden={true}
@@ -131,33 +97,7 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
         id="react-accessible-tooltip-0"
         tabIndex="-1"
       >
-        <CloseButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            close
-          </button>
-        </CloseButton>
-        <ToggleButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            toggle
-          </button>
-        </ToggleButton>
-        <ShowButton
-          onClick={[Function]}
-        >
-          <button
-            onClick={[Function]}
-          >
-            toggle
-          </button>
-        </ShowButton>
+        Hello world
       </div>
     </Overlay>
   </div>
