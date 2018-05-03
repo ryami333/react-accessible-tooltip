@@ -6,21 +6,19 @@ const cssnano = require('cssnano');
 
 const config = {
     entry: {
-        'src/main.js': [
-            'babel-polyfill',
-            './src/main.js',
-        ],
+        'src/main.js': ['babel-polyfill', './src/main.js'],
     },
 
-    output: process.env.NODE_ENV === 'production'
-        ? {
-            path: path.resolve(__dirname, 'dist'),
-            filename: '[name][chunkhash].js',
-        }
-        : {
-            path: '/',
-            filename: '[name]',
-        },
+    output:
+        process.env.NODE_ENV === 'production'
+            ? {
+                  path: path.resolve(__dirname, 'dist'),
+                  filename: '[name][chunkhash].js',
+              }
+            : {
+                  path: '/',
+                  filename: '[name]',
+              },
 
     module: {
         rules: [
@@ -30,10 +28,7 @@ const config = {
                     /(node_modules)/,
                     /(packages\/react-accessible-tooltip)/,
                 ],
-                use: [
-                    'babel-loader',
-                    'eslint-loader',
-                ],
+                use: ['babel-loader', 'eslint-loader'],
             },
             {
                 test: /\.scss$/,
@@ -44,10 +39,7 @@ const config = {
                         loader: 'postcss-loader',
                         options: {
                             plugins() {
-                                return [
-                                    autoprefixer,
-                                    cssnano,
-                                ];
+                                return [autoprefixer, cssnano];
                             },
                         },
                     },
@@ -92,6 +84,7 @@ const config = {
     devtool: 'source-map',
 
     devServer: {
+        host: '0.0.0.0',
         port: 3000,
         hot: true,
     },
