@@ -29,7 +29,7 @@ export type OverlayProps = {
 };
 
 export type TooltipState = {
-    isHidden: boolean,
+    isFocussed: boolean,
 };
 
 export type TooltipProps = ElementProps<'div'> & {
@@ -48,7 +48,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     }
 
     state = {
-        isHidden: true,
+        isFocussed: false,
     };
 
     componentDidMount() {
@@ -83,7 +83,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             target instanceof Element &&
             this.container instanceof Element &&
             !this.container.contains(target) && // touch target not a tooltip descendent
-            !this.state.isHidden // prevent redundant state change
+            this.state.isFocused // prevent redundant state change
         ) {
             this.hide();
             activeElement.blur();
@@ -91,15 +91,15 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     };
 
     hide = () => {
-        this.setState({ isHidden: true });
+        this.setState({ isFocussed: false });
     };
 
     show = () => {
-        this.setState({ isHidden: false });
+        this.setState({ isFocussed: true });
     };
 
     toggle = () => {
-        this.setState({ isHidden: !this.state.isHidden });
+        this.setState({ isFocussed: !this.state.isFocussed });
     };
 
     container: ?HTMLDivElement;
@@ -113,7 +113,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             ...rest
         } = this.props;
 
-        const { isHidden } = this.state;
+        const { isFocussed } = this.state;
+        const isHidden = isFocussed;
 
         const labelProps: LabelProps = {
             labelAttributes: {
@@ -132,7 +133,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             overlayAttributes: {
                 tabIndex: '-1',
                 id: this.identifier,
-                'aria-hidden': this.state.isHidden,
+                'aria-hidden': isHidden,
             },
             isHidden,
             requestHide: this.hide,
