@@ -30,6 +30,7 @@ export type OverlayProps = {
 
 export type TooltipState = {
     isFocussed: boolean,
+    isHovered: boolean,
 };
 
 export type TooltipProps = ElementProps<'div'> & {
@@ -49,6 +50,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
     state = {
         isFocussed: false,
+        isHovered: false,
     };
 
     componentDidMount() {
@@ -72,6 +74,14 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         } else if (!currentTarget.contains(newTarget)) {
             this.hide();
         }
+    };
+
+    onMouseEnter = () => {
+        this.setState({ isHovered: true });
+    };
+
+    onMouseLeave = () => {
+        this.setState({ isHovered: false });
     };
 
     // This handles the support for touch devices that do not trigger blur on 'touch-away'.
@@ -113,8 +123,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             ...rest
         } = this.props;
 
-        const { isFocussed } = this.state;
-        const isHidden = isFocussed;
+        const { isFocussed, isHovered } = this.state;
+        const isHidden = isFocussed || isHovered;
 
         const labelProps: LabelProps = {
             labelAttributes: {
