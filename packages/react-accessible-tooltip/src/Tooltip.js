@@ -124,7 +124,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         } = this.props;
 
         const { isFocussed, isHovered } = this.state;
-        const isHidden = isFocussed || isHovered;
+        const isHidden = !(isFocussed || isHovered);
 
         const labelProps: LabelProps = {
             labelAttributes: {
@@ -161,6 +161,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                         containerRef(ref);
                     }
                 }}
+                onMouseEnter={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
             >
                 <Label {...labelProps} />
                 <Overlay {...overlayProps} />
