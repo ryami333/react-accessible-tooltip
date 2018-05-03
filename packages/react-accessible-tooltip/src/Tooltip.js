@@ -11,9 +11,6 @@ export type LabelProps = {
         onFocus: () => void,
     },
     isHidden: boolean,
-    requestHide: () => void,
-    requestShow: () => void,
-    requestToggle: () => void,
 };
 
 export type OverlayProps = {
@@ -23,9 +20,6 @@ export type OverlayProps = {
         'aria-hidden': boolean,
     },
     isHidden: boolean,
-    requestHide: () => void,
-    requestShow: () => void,
-    requestToggle: () => void,
 };
 
 export type TooltipState = {
@@ -61,6 +55,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         document.removeEventListener('touchstart', this.handleTouch);
     }
 
+    onFocus = () => {
+        this.setState({ isFocussed: true });
+    };
+
     onBlur = ({
         relatedTarget,
         currentTarget,
@@ -70,9 +68,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
         if (!(newTarget && newTarget instanceof HTMLElement)) {
-            this.hide();
+            this.setState({ isFocussed: false });
         } else if (!currentTarget.contains(newTarget)) {
-            this.hide();
+            this.setState({ isFocussed: false });
         }
     };
 
@@ -95,21 +93,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             !this.container.contains(target) && // touch target not a tooltip descendent
             this.state.isFocused // prevent redundant state change
         ) {
-            this.hide();
+            this.setState({ isFocussed: false });
             activeElement.blur();
         }
-    };
-
-    hide = () => {
-        this.setState({ isFocussed: false });
-    };
-
-    show = () => {
-        this.setState({ isFocussed: true });
-    };
-
-    toggle = () => {
-        this.setState({ isFocussed: !this.state.isFocussed });
     };
 
     container: ?HTMLDivElement;
@@ -131,12 +117,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                 role: 'tooltip',
                 tabIndex: '0',
                 'aria-describedby': this.identifier,
-                onFocus: this.show,
+                onFocus: this.onFocus,
             },
             isHidden,
-            requestHide: this.hide,
-            requestShow: this.show,
-            requestToggle: this.toggle,
         };
 
         const overlayProps: OverlayProps = {
@@ -146,9 +129,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                 'aria-hidden': isHidden,
             },
             isHidden,
-            requestHide: this.hide,
-            requestShow: this.show,
-            requestToggle: this.toggle,
         };
 
         return (
