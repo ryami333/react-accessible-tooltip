@@ -27,44 +27,26 @@ function testReact(React, Tooltip) {
         />
     );
 
-    const CloseButton = props => <button {...props} />;
-    const ToggleButton = props => <button {...props} />;
-    const ShowButton = props => <button {...props} />;
-
-    const Overlay = ({
-        isHidden,
-        requestHide,
-        requestToggle,
-        requestShow,
-        overlayAttributes,
-    }: OverlayProps) => (
+    const Overlay = ({ isHidden, overlayAttributes }: OverlayProps) => (
         <div
             className={classnames(OVERLAY_CLASS, {
                 [HIDDEN_CLASS]: isHidden,
             })}
             {...overlayAttributes}
         >
-            <CloseButton onClick={requestHide}>close</CloseButton>
-            <ToggleButton onClick={requestToggle}>toggle</ToggleButton>
-            <ShowButton onClick={requestShow}>toggle</ShowButton>
+            Hello world
         </div>
     );
 
     let wrapper;
     let label;
     let overlay;
-    let closeButton;
-    let toggleButton;
-    let showButton;
 
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
 
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
-        closeButton = wrapper.find(CloseButton);
-        toggleButton = wrapper.find(ToggleButton);
-        showButton = wrapper.find(ShowButton);
     });
 
     describe(`${React.version} -`, () => {
@@ -117,32 +99,6 @@ function testReact(React, Tooltip) {
             label.simulate('focus');
             expect(wrapper.state('isHidden')).toBeFalsy();
             label.simulate('blur', { relatedTarget: overlay.getDOMNode() });
-            expect(wrapper.state('isHidden')).toBeFalsy();
-        });
-
-        it('respects a manual close request', () => {
-            label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-
-            closeButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeTruthy();
-        });
-
-        it('respects a manual toggle request', () => {
-            label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-
-            toggleButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeTruthy();
-            toggleButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-        });
-
-        it('respects a manual show request', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
-            showButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-            showButton.simulate('click');
             expect(wrapper.state('isHidden')).toBeFalsy();
         });
 
