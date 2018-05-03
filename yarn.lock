@@ -6163,13 +6163,6 @@ rc@^1.1.7:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react-accessible-tooltip@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/react-accessible-tooltip/-/react-accessible-tooltip-1.5.2.tgz#7f6ed7883515e18bfe5f37231285b1d5953434d3"
-  dependencies:
-    react-15 "npm:react@15.6.1"
-    react-16 "npm:react@16.2.0"
-
 react-dom@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
