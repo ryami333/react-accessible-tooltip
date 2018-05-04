@@ -42,6 +42,16 @@ function testReact(React, Tooltip) {
     let label;
     let overlay;
 
+    function isOverlayHidden() {
+        return (
+            wrapper
+                .find(Overlay)
+                .find('div')
+                .instance()
+                .getAttribute('aria-hidden') === 'true'
+        );
+    }
+
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
 
@@ -61,45 +71,45 @@ function testReact(React, Tooltip) {
         });
 
         it('hides the overlay by default', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it('reveals the overlay when the label is focussed', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
         });
 
         it('hides the overlay when the whole tooltip is blurred (and focus changes to a non-recognisable target)', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: 'notAnElement' });
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it("hides the overlay when focus shifts and there's no support for event.relatedTarget", () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur');
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it('hides the overlay when focus shifts to a target outside the tooltip', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: document.body });
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it("doesn't hide the overlay when focus shifts to the tooltip overlay", () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: overlay.getDOMNode() });
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
         });
 
         it('respects the containerRef prop', () => {
