@@ -59,6 +59,10 @@ function testReact(React, Tooltip) {
         overlay = wrapper.find(Overlay);
     });
 
+    afterEach(() => {
+        wrapper.unmount();
+    });
+
     describe(`${React.version} -`, () => {
         it('matches the previous snapshot', () => {
             expect(toJson(wrapper)).toMatchSnapshot();
