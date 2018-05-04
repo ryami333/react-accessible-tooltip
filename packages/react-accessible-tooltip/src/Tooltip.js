@@ -23,7 +23,7 @@ export type OverlayProps = {
 };
 
 export type TooltipState = {
-    isFocussed: boolean,
+    isFocused: boolean,
     isHovered: boolean,
 };
 
@@ -43,7 +43,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     }
 
     state = {
-        isFocussed: false,
+        isFocused: false,
         isHovered: false,
     };
 
@@ -56,7 +56,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     }
 
     onFocus = () => {
-        this.setState({ isFocussed: true });
+        this.setState({ isFocused: true });
     };
 
     onBlur = ({
@@ -68,9 +68,9 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
         if (!(newTarget && newTarget instanceof HTMLElement)) {
-            this.setState({ isFocussed: false });
+            this.setState({ isFocused: false });
         } else if (!currentTarget.contains(newTarget)) {
-            this.setState({ isFocussed: false });
+            this.setState({ isFocused: false });
         }
     };
 
@@ -93,7 +93,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             !this.container.contains(target) && // touch target not a tooltip descendent
             this.state.isFocused // prevent redundant state change
         ) {
-            this.setState({ isFocussed: false });
+            this.setState({ isFocused: false });
             activeElement.blur();
         }
     };
@@ -109,8 +109,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             ...rest
         } = this.props;
 
-        const { isFocussed, isHovered } = this.state;
-        const isHidden = !(isFocussed || isHovered);
+        const { isFocused, isHovered } = this.state;
+        const isHidden = !(isFocused || isHovered);
 
         const labelProps: LabelProps = {
             labelAttributes: {
