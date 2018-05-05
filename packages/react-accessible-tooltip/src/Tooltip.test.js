@@ -41,6 +41,8 @@ function testReact(React, Tooltip) {
     let wrapper;
     let label;
     let overlay;
+    let labelDiv;
+    let overlayDiv;
 
     function isOverlayHidden() {
         return (
@@ -57,6 +59,8 @@ function testReact(React, Tooltip) {
 
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
+        labelDiv = wrapper.find(`.${LABEL_CLASS}`).instance();
+        overlayDiv = wrapper.find(`.${OVERLAY_CLASS}`).instance();
     });
 
     afterEach(() => {
@@ -138,63 +142,28 @@ function testReact(React, Tooltip) {
         });
 
         describe('touch devices -', () => {
-            // let containerRef;
-            let labelRef;
-            let overlayRef;
-
-            beforeAll(() => {
-                const testRoot = document.createElement('div');
-                ReactDOM.render(
-                    <div
-                    // ref={_containerRef => {
-                    //     containerRef = _containerRef;
-                    // }}
-                    >
-                        <Tooltip
-                            label={({ labelAttributes }) => (
-                                <div
-                                    {...labelAttributes}
-                                    ref={_labelRef => {
-                                        labelRef = _labelRef;
-                                    }}
-                                />
-                            )}
-                            overlay={({ overlayAttributes }) => (
-                                <div
-                                    {...overlayAttributes}
-                                    ref={_overlayRef => {
-                                        overlayRef = _overlayRef;
-                                    }}
-                                />
-                            )}
-                        />
-                    </div>,
-                    testRoot,
-                );
-            });
-
             it('opens on focus', () => {
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                expect(isOverlayHidden()).toBeTruthy();
+                Simulate.focus(labelDiv);
+                expect(isOverlayHidden()).toBeFalsy();
             });
 
             it('closes on touch-away', () => {
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                Simulate.focus(labelDiv);
+                expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe
                 document.body.dispatchEvent(testEvent);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
+                expect(isOverlayHidden()).toBeTruthy();
             });
 
             it("doesn't close when descendant element touched", () => {
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                Simulate.focus(labelDiv);
+                expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe;
-                overlayRef.dispatchEvent(testEvent);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                overlayDiv.dispatchEvent(testEvent);
+                expect(isOverlayHidden()).toBeFalsy();
             });
 
             it('successfully unmounts without crashing', () => {
