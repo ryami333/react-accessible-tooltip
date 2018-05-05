@@ -3,8 +3,6 @@
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import { Simulate } from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
 
 // $FlowFixMe
 import React16 from 'react-16';
@@ -157,12 +155,12 @@ function testReact(React, Tooltip) {
         describe('touch devices -', () => {
             it('opens on focus', () => {
                 expect(isOverlayHidden()).toBeTruthy();
-                Simulate.focus(labelDiv);
+                label.simulate('focus');
                 expect(isOverlayHidden()).toBeFalsy();
             });
 
             it('closes on touch-away', () => {
-                Simulate.focus(labelDiv);
+                label.simulate('focus');
                 expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe
@@ -171,7 +169,7 @@ function testReact(React, Tooltip) {
             });
 
             it("doesn't close when descendant element touched", () => {
-                Simulate.focus(labelDiv);
+                label.simulate('focus');
                 expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe;
