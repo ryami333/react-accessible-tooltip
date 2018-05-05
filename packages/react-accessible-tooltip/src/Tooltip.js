@@ -126,7 +126,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             overlayAttributes: {
                 tabIndex: '-1',
                 id: this.identifier,
-                'aria-hidden': isHidden,
+                'aria-hidden': isHidden.toString(),
             },
             isHidden,
         };

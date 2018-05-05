@@ -33,14 +33,14 @@ exports[`<Tooltip /> React 15 15.6.1 - matches the previous snapshot 1`] = `
       isHidden={true}
       overlayAttributes={
         Object {
-          "aria-hidden": true,
+          "aria-hidden": "true",
           "id": "react-accessible-tooltip-0",
           "tabIndex": "-1",
         }
       }
     >
       <div
-        aria-hidden={true}
+        aria-hidden="true"
         className="OVERLAY_CLASS HIDDEN_CLASS"
         id="react-accessible-tooltip-0"
         tabIndex="-1"
@@ -85,14 +85,14 @@ exports[`<Tooltip /> React 16 16.2.0 - matches the previous snapshot 1`] = `
       isHidden={true}
       overlayAttributes={
         Object {
-          "aria-hidden": true,
+          "aria-hidden": "true",
           "id": "react-accessible-tooltip-0",
           "tabIndex": "-1",
         }
       }
     >
       <div
-        aria-hidden={true}
+        aria-hidden="true"
         className="OVERLAY_CLASS HIDDEN_CLASS"
         id="react-accessible-tooltip-0"
         tabIndex="-1"
