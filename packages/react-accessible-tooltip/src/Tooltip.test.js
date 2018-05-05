@@ -137,10 +137,6 @@ function testReact(React, Tooltip) {
             );
         });
 
-        it('respects a user-generated toggle', () => {
-            wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
-        });
-
         describe('touch devices -', () => {
             it('opens on focus', () => {
                 expect(isOverlayHidden()).toBeTruthy();
