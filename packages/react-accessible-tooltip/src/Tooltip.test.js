@@ -137,6 +137,23 @@ function testReact(React, Tooltip) {
             );
         });
 
+        describe('hover functionality', () => {
+            it('opens on mouseEnter and closes on mouseLeave', () => {
+                expect(isOverlayHidden()).toBeTruthy();
+                wrapper
+                    .find('div')
+                    .first()
+                    .simulate('mouseEnter');
+                expect(isOverlayHidden()).toBeFalsy();
+
+                wrapper
+                    .find('div')
+                    .first()
+                    .simulate('mouseLeave');
+                expect(isOverlayHidden()).toBeTruthy();
+            });
+        });
+
         describe('touch devices -', () => {
             it('opens on focus', () => {
                 expect(isOverlayHidden()).toBeTruthy();
