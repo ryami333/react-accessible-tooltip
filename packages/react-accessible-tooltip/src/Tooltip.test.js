@@ -39,7 +39,6 @@ function testReact(React, Tooltip) {
     let wrapper;
     let label;
     let overlay;
-    let labelDiv;
     let overlayDiv;
 
     function isOverlayHidden() {
@@ -57,7 +56,6 @@ function testReact(React, Tooltip) {
 
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
-        labelDiv = wrapper.find(`.${LABEL_CLASS}`).instance();
         overlayDiv = wrapper.find(`.${OVERLAY_CLASS}`).instance();
     });
 
