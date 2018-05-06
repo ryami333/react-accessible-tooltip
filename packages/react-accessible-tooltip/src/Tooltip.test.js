@@ -3,8 +3,6 @@
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
-import { Simulate } from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
 
 // $FlowFixMe
 import React16 from 'react-16';
@@ -27,44 +25,42 @@ function testReact(React, Tooltip) {
         />
     );
 
-    const CloseButton = props => <button {...props} />;
-    const ToggleButton = props => <button {...props} />;
-    const ShowButton = props => <button {...props} />;
-
-    const Overlay = ({
-        isHidden,
-        requestHide,
-        requestToggle,
-        requestShow,
-        overlayAttributes,
-    }: OverlayProps) => (
+    const Overlay = ({ isHidden, overlayAttributes }: OverlayProps) => (
         <div
             className={classnames(OVERLAY_CLASS, {
                 [HIDDEN_CLASS]: isHidden,
             })}
             {...overlayAttributes}
         >
-            <CloseButton onClick={requestHide}>close</CloseButton>
-            <ToggleButton onClick={requestToggle}>toggle</ToggleButton>
-            <ShowButton onClick={requestShow}>toggle</ShowButton>
+            Hello world
         </div>
     );
 
     let wrapper;
     let label;
     let overlay;
-    let closeButton;
-    let toggleButton;
-    let showButton;
+    let overlayDiv;
+
+    function isOverlayHidden() {
+        return (
+            wrapper
+                .find(Overlay)
+                .find('div')
+                .instance()
+                .getAttribute('aria-hidden') === 'true'
+        );
+    }
 
     beforeEach(() => {
         wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
 
         label = wrapper.find(Label);
         overlay = wrapper.find(Overlay);
-        closeButton = wrapper.find(CloseButton);
-        toggleButton = wrapper.find(ToggleButton);
-        showButton = wrapper.find(ShowButton);
+        overlayDiv = wrapper.find(`.${OVERLAY_CLASS}`).instance();
+    });
+
+    afterEach(() => {
+        wrapper.unmount();
     });
 
     describe(`${React.version} -`, () => {
@@ -79,71 +75,45 @@ function testReact(React, Tooltip) {
         });
 
         it('hides the overlay by default', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it('reveals the overlay when the label is focussed', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
         });
 
         it('hides the overlay when the whole tooltip is blurred (and focus changes to a non-recognisable target)', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: 'notAnElement' });
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it("hides the overlay when focus shifts and there's no support for event.relatedTarget", () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur');
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it('hides the overlay when focus shifts to a target outside the tooltip', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: document.body });
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
         });
 
         it("doesn't hide the overlay when focus shifts to the tooltip overlay", () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
+            expect(isOverlayHidden()).toBeTruthy();
             label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
             label.simulate('blur', { relatedTarget: overlay.getDOMNode() });
-            expect(wrapper.state('isHidden')).toBeFalsy();
-        });
-
-        it('respects a manual close request', () => {
-            label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-
-            closeButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeTruthy();
-        });
-
-        it('respects a manual toggle request', () => {
-            label.simulate('focus');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-
-            toggleButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeTruthy();
-            toggleButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-        });
-
-        it('respects a manual show request', () => {
-            expect(wrapper.state('isHidden')).toBeTruthy();
-            showButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeFalsy();
-            showButton.simulate('click');
-            expect(wrapper.state('isHidden')).toBeFalsy();
+            expect(isOverlayHidden()).toBeFalsy();
         });
 
         it('respects the containerRef prop', () => {
@@ -163,68 +133,46 @@ function testReact(React, Tooltip) {
             );
         });
 
-        it('respects a user-generated toggle', () => {
-            wrapper = mount(<Tooltip label={Label} overlay={Overlay} />);
+        describe('hover functionality', () => {
+            it('opens on mouseEnter and closes on mouseLeave', () => {
+                expect(isOverlayHidden()).toBeTruthy();
+                wrapper
+                    .find('div')
+                    .first()
+                    .simulate('mouseEnter');
+                expect(isOverlayHidden()).toBeFalsy();
+
+                wrapper
+                    .find('div')
+                    .first()
+                    .simulate('mouseLeave');
+                expect(isOverlayHidden()).toBeTruthy();
+            });
         });
 
         describe('touch devices -', () => {
-            // let containerRef;
-            let labelRef;
-            let overlayRef;
-
-            beforeAll(() => {
-                const testRoot = document.createElement('div');
-                ReactDOM.render(
-                    <div
-                    // ref={_containerRef => {
-                    //     containerRef = _containerRef;
-                    // }}
-                    >
-                        <Tooltip
-                            label={({ labelAttributes }) => (
-                                <div
-                                    {...labelAttributes}
-                                    ref={_labelRef => {
-                                        labelRef = _labelRef;
-                                    }}
-                                />
-                            )}
-                            overlay={({ overlayAttributes }) => (
-                                <div
-                                    {...overlayAttributes}
-                                    ref={_overlayRef => {
-                                        overlayRef = _overlayRef;
-                                    }}
-                                />
-                            )}
-                        />
-                    </div>,
-                    testRoot,
-                );
-            });
-
             it('opens on focus', () => {
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                expect(isOverlayHidden()).toBeTruthy();
+                label.simulate('focus');
+                expect(isOverlayHidden()).toBeFalsy();
             });
 
             it('closes on touch-away', () => {
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                label.simulate('focus');
+                expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe
                 document.body.dispatchEvent(testEvent);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('true');
+                expect(isOverlayHidden()).toBeTruthy();
             });
 
             it("doesn't close when descendant element touched", () => {
-                Simulate.focus(labelRef);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                label.simulate('focus');
+                expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
                 // $FlowFixMe;
-                overlayRef.dispatchEvent(testEvent);
-                expect(overlayRef.getAttribute('aria-hidden')).toEqual('false');
+                overlayDiv.dispatchEvent(testEvent);
+                expect(isOverlayHidden()).toBeFalsy();
             });
 
             it('successfully unmounts without crashing', () => {

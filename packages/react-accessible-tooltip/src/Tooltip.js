@@ -11,25 +11,20 @@ export type LabelProps = {
         onFocus: () => void,
     },
     isHidden: boolean,
-    requestHide: () => void,
-    requestShow: () => void,
-    requestToggle: () => void,
 };
 
 export type OverlayProps = {
     overlayAttributes: {
         tabIndex: '-1',
         id: string,
-        'aria-hidden': boolean,
+        'aria-hidden': string,
     },
     isHidden: boolean,
-    requestHide: () => void,
-    requestShow: () => void,
-    requestToggle: () => void,
 };
 
 export type TooltipState = {
-    isHidden: boolean,
+    isFocused: boolean,
+    isHovered: boolean,
 };
 
 export type TooltipProps = ElementProps<'div'> & {
@@ -48,7 +43,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     }
 
     state = {
-        isHidden: true,
+        isFocused: false,
+        isHovered: false,
     };
 
     componentDidMount() {
@@ -59,6 +55,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         document.removeEventListener('touchstart', this.handleTouch);
     }
 
+    onFocus = () => {
+        this.setState({ isFocused: true });
+    };
+
     onBlur = ({
         relatedTarget,
         currentTarget,
@@ -68,10 +68,18 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
         if (!(newTarget && newTarget instanceof HTMLElement)) {
-            this.hide();
+            this.setState({ isFocused: false });
         } else if (!currentTarget.contains(newTarget)) {
-            this.hide();
+            this.setState({ isFocused: false });
         }
+    };
+
+    onMouseEnter = () => {
+        this.setState({ isHovered: true });
+    };
+
+    onMouseLeave = () => {
+        this.setState({ isHovered: false });
     };
 
     // This handles the support for touch devices that do not trigger blur on 'touch-away'.
@@ -83,23 +91,11 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             target instanceof Element &&
             this.container instanceof Element &&
             !this.container.contains(target) && // touch target not a tooltip descendent
-            !this.state.isHidden // prevent redundant state change
+            this.state.isFocused // prevent redundant state change
         ) {
-            this.hide();
+            this.setState({ isFocused: false });
             activeElement.blur();
         }
-    };
-
-    hide = () => {
-        this.setState({ isHidden: true });
-    };
-
-    show = () => {
-        this.setState({ isHidden: false });
-    };
-
-    toggle = () => {
-        this.setState({ isHidden: !this.state.isHidden });
     };
 
     container: ?HTMLDivElement;
@@ -113,31 +109,26 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             ...rest
         } = this.props;
 
-        const { isHidden } = this.state;
+        const { isFocused, isHovered } = this.state;
+        const isHidden = !(isFocused || isHovered);
 
         const labelProps: LabelProps = {
             labelAttributes: {
                 role: 'tooltip',
                 tabIndex: '0',
                 'aria-describedby': this.identifier,
-                onFocus: this.show,
+                onFocus: this.onFocus,
             },
             isHidden,
-            requestHide: this.hide,
-            requestShow: this.show,
-            requestToggle: this.toggle,
         };
 
         const overlayProps: OverlayProps = {
             overlayAttributes: {
                 tabIndex: '-1',
                 id: this.identifier,
-                'aria-hidden': this.state.isHidden,
+                'aria-hidden': isHidden.toString(),
             },
             isHidden,
-            requestHide: this.hide,
-            requestShow: this.show,
-            requestToggle: this.toggle,
         };
 
         return (
@@ -150,6 +141,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                         containerRef(ref);
                     }
                 }}
+                onMouseEnter={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
             >
                 <Label {...labelProps} />
                 <Overlay {...overlayProps} />

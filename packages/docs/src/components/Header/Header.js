@@ -6,7 +6,7 @@ import './header.scss';
 
 function Header() {
     return (
-        <header className="header">
+        <header className="header" role="banner">
             <Container>
                 <h1 className="header__title">React Accessible Tooltip</h1>
                 <h2 className="header__subtitle">Interactive Demo</h2>
