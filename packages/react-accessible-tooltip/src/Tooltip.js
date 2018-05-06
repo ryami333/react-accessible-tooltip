@@ -86,6 +86,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             !this.state.isHidden // prevent redundant state change
         ) {
             this.hide();
+            activeElement.blur();
         }
     };
 
