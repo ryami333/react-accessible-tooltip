@@ -5,7 +5,6 @@ import type { ElementProps, ComponentType } from 'react';
 
 export type LabelProps = {
     labelAttributes: {
-        role: 'tooltip',
         tabIndex: '0',
         'aria-describedby': string,
         onFocus: () => void,
@@ -15,6 +14,7 @@ export type LabelProps = {
 
 export type OverlayProps = {
     overlayAttributes: {
+        role: 'tooltip',
         tabIndex: '-1',
         id: string,
         'aria-hidden': string,
@@ -114,7 +114,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         const labelProps: LabelProps = {
             labelAttributes: {
-                role: 'tooltip',
                 tabIndex: '0',
                 'aria-describedby': this.identifier,
                 onFocus: this.onFocus,
@@ -124,6 +123,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
 
         const overlayProps: OverlayProps = {
             overlayAttributes: {
+                role: 'tooltip',
                 tabIndex: '-1',
                 id: this.identifier,
                 'aria-hidden': isHidden.toString(),
