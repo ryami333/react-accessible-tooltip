@@ -116,23 +116,6 @@ function testReact(React, Tooltip) {
             expect(isOverlayHidden()).toBeFalsy();
         });
 
-        it('respects the containerRef prop', () => {
-            const containerRef = jest.fn();
-
-            wrapper = mount(
-                <Tooltip
-                    label={Label}
-                    overlay={Overlay}
-                    containerRef={containerRef}
-                />,
-            );
-
-            expect(containerRef.mock.calls.length).toEqual(1);
-            expect(containerRef.mock.calls[0][0]).toBeInstanceOf(
-                HTMLDivElement,
-            );
-        });
-
         describe('hover functionality', () => {
             it('opens on mouseEnter and closes on mouseLeave', () => {
                 expect(isOverlayHidden()).toBeTruthy();
