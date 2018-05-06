@@ -17,7 +17,7 @@ export type OverlayProps = {
     overlayAttributes: {
         tabIndex: '-1',
         id: string,
-        'aria-hidden': boolean,
+        'aria-hidden': string,
     },
     isHidden: boolean,
 };
