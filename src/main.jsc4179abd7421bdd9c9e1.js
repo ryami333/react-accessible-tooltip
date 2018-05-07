@@ -10453,7 +10453,7 @@ function App() {
 function Header() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'header',
-        { className: 'header' },
+        { className: 'header', role: 'banner' },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_1__Container_Container__["a" /* default */],
             null,
@@ -10868,7 +10868,12 @@ var Tooltip = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Tooltip.__proto__ || Object.getPrototypeOf(Tooltip)).call(this, props));
 
         _this.state = {
-            isHidden: true
+            isFocused: false,
+            isHovered: false
+        };
+
+        _this.onFocus = function () {
+            _this.setState({ isFocused: true });
         };
 
         _this.onBlur = function (_ref) {
@@ -10880,10 +10885,18 @@ var Tooltip = function (_Component) {
 
             // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
             if (!(newTarget && newTarget instanceof HTMLElement)) {
-                _this.hide();
+                _this.setState({ isFocused: false });
             } else if (!currentTarget.contains(newTarget)) {
-                _this.hide();
+                _this.setState({ isFocused: false });
             }
+        };
+
+        _this.onMouseEnter = function () {
+            _this.setState({ isHovered: true });
+        };
+
+        _this.onMouseLeave = function () {
+            _this.setState({ isHovered: false });
         };
 
         _this.handleTouch = function (_ref2) {
@@ -10892,25 +10905,12 @@ var Tooltip = function (_Component) {
                 activeElement = _document.activeElement;
 
 
-            if (!(activeElement instanceof Element) || !(target instanceof Element)) return;
-
-            if (_this.container instanceof Element && !_this.container.contains(target) && // touch target not a tooltip descendent
-            !_this.state.isHidden // prevent redundant state change
+            if (activeElement instanceof Element && target instanceof Element && _this.container instanceof Element && !_this.container.contains(target) && // touch target not a tooltip descendent
+            _this.state.isFocused // prevent redundant state change
             ) {
-                    _this.hide();
+                    _this.setState({ isFocused: false });
+                    activeElement.blur();
                 }
-        };
-
-        _this.hide = function () {
-            _this.setState({ isHidden: true });
-        };
-
-        _this.show = function () {
-            _this.setState({ isHidden: false });
-        };
-
-        _this.toggle = function () {
-            _this.setState({ isHidden: !_this.state.isHidden });
         };
 
         _this.identifier = 'react-accessible-tooltip-' + counter;
@@ -10939,35 +10939,31 @@ var Tooltip = function (_Component) {
             var _props = this.props,
                 Label = _props.label,
                 Overlay = _props.overlay,
-                containerRef = _props.containerRef,
-                rest = _objectWithoutProperties(_props, ['label', 'overlay', 'containerRef']);
+                rest = _objectWithoutProperties(_props, ['label', 'overlay']);
 
-            var isHidden = this.state.isHidden;
+            var _state = this.state,
+                isFocused = _state.isFocused,
+                isHovered = _state.isHovered;
 
+            var isHidden = !(isFocused || isHovered);
 
             var labelProps = {
                 labelAttributes: {
-                    role: 'tooltip',
                     tabIndex: '0',
-                    'aria-describedby': '#' + this.identifier,
-                    onFocus: this.show
+                    'aria-describedby': this.identifier,
+                    onFocus: this.onFocus
                 },
-                isHidden: isHidden,
-                requestHide: this.hide,
-                requestShow: this.show,
-                requestToggle: this.toggle
+                isHidden: isHidden
             };
 
             var overlayProps = {
                 overlayAttributes: {
+                    role: 'tooltip',
                     tabIndex: '-1',
                     id: this.identifier,
-                    'aria-hidden': this.state.isHidden
+                    'aria-hidden': isHidden.toString()
                 },
-                isHidden: isHidden,
-                requestHide: this.hide,
-                requestShow: this.show,
-                requestToggle: this.toggle
+                isHidden: isHidden
             };
 
             return React__default.createElement(
@@ -10976,10 +10972,9 @@ var Tooltip = function (_Component) {
                     onBlur: this.onBlur,
                     ref: function ref(_ref3) {
                         _this2.container = _ref3;
-                        if (containerRef) {
-                            containerRef(_ref3);
-                        }
-                    }
+                    },
+                    onMouseEnter: this.onMouseEnter,
+                    onMouseLeave: this.onMouseLeave
                 }),
                 React__default.createElement(Label, labelProps),
                 React__default.createElement(Overlay, overlayProps)
@@ -11090,4 +11085,4 @@ exports.push([module.i, "body,html{padding:0;margin:0;background-color:#644e5b}*
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=main.js41076107b06edc6a5859.js.map
+//# sourceMappingURL=main.jsc4179abd7421bdd9c9e1.js.map
