@@ -30,7 +30,6 @@ export type TooltipState = {
 export type TooltipProps = ElementProps<'div'> & {
     label: ComponentType<LabelProps>,
     overlay: ComponentType<OverlayProps>,
-    containerRef?: HTMLDivElement => void,
 };
 
 let counter = 0;
@@ -102,12 +101,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     identifier: string;
 
     render() {
-        const {
-            label: Label,
-            overlay: Overlay,
-            containerRef,
-            ...rest
-        } = this.props;
+        const { label: Label, overlay: Overlay, ...rest } = this.props;
 
         const { isFocused, isHovered } = this.state;
         const isHidden = !(isFocused || isHovered);
@@ -137,9 +131,6 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
                 onBlur={this.onBlur}
                 ref={ref => {
                     this.container = ref;
-                    if (containerRef) {
-                        containerRef(ref);
-                    }
                 }}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
