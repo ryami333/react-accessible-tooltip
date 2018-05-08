@@ -47,10 +47,12 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
     };
 
     componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyDown);
         document.addEventListener('touchstart', this.handleTouch);
     }
 
     componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown);
         document.removeEventListener('touchstart', this.handleTouch);
     }
 
@@ -94,6 +96,12 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         ) {
             this.setState({ isFocused: false });
             activeElement.blur();
+        }
+    };
+
+    handleKeyDown = ({ key, keyCode, which }: KeyboardEvent) => {
+        if (key === 'Escape' || keyCode === 27 || which === 27) {
+            this.setState({ isFocused: false });
         }
     };
 
