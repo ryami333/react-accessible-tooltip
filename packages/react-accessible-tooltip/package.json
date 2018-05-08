@@ -63,6 +63,7 @@
     "start": "rollup -c -w",
     "test": "jest src",
     "lint": "eslint src",
+    "prepublishOnly": "yarn build",
     "coverage":
       "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
   },
