@@ -1,5 +1,11 @@
 # Changelog
 
+## UNRELEASED
+
+### Added
+
+* Support for close-on-escape-key.
+
 ## v2.0.0
 
 ### Added
