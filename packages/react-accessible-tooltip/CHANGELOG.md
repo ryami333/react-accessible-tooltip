@@ -1,5 +1,11 @@
 # Changelog
 
+## Next
+
+### Fixed
+
+* Force close-on-touch-away on iOS.
+
 ## v2.0.2
 
 ### Added
