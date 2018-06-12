@@ -10,7 +10,10 @@
     "type": "git",
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
-  "authors": ["Mitch Ryan <mitch@mitch-ryan.com>"],
+  "author": {
+    "name": "Mitch Ryan",
+    "url": "https://github.com/ryami333"
+  },
   "contributors": [
     {
       "name": "Lydie Danet",
