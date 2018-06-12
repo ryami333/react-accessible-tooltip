@@ -10,6 +10,16 @@
     "type": "git",
     "url": "https://github.com/ryami333/react-accessible-tooltip.git"
   },
+  "author": {
+    "name": "Mitch Ryan",
+    "url": "https://github.com/ryami333"
+  },
+  "contributors": [
+    {
+      "name": "Lydie Danet",
+      "url": "https://github.com/ldanet"
+    }
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
