@@ -96,6 +96,14 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         ) {
             this.setState({ isFocused: false });
             activeElement.blur();
+        } else if (
+            activeElement instanceof Element &&
+            target instanceof Element &&
+            this.container instanceof Element &&
+            this.container.contains(target) && // touch target is on tooltip descendant
+            !this.state.isFocused // prevent redundant state change
+        ) {
+            this.setState({ isFocused: true });
         }
     };
 
