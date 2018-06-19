@@ -97,8 +97,8 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             if (this.state.isFocused) {
                 this.setState({ isFocused: false });
             }
+            // prevent redundant state change
             if (this.state.isHovered) {
-                // prevent redundant state change
                 this.setState({ isHovered: false });
             }
             // don't blur active element if outside
