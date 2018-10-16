@@ -1,6 +1,8 @@
 @import '../../styles/settings';
 @import '../../styles/mixins';
 
+$triangle-size: 16px;
+
 .tooltip {
     display: inline-block;
     position: relative;
@@ -20,7 +22,7 @@
         left: 50%;
         margin-left: - $width / 2;
         color: $color-white;
-        padding-bottom: 30px;
+        padding-bottom: $triangle-size;
 
 
         &--hidden {
@@ -36,15 +38,15 @@
         padding: $spacing-gutter;
 
         &::before {
-            $size: 16px;
             position: absolute;
             display: block;
             content: '';
             left: 50%;
             right: 0;
             top: 100%;
-            border: $size solid transparent;
-            margin-left: -$size;
+            border: $triangle-size solid transparent;
+            border-bottom: 0;
+            margin-left: -$triangle-size;
             border-top-color: $color-brand-dark;
             width: 0;
             height: 0;
