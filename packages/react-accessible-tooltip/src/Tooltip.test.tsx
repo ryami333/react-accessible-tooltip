@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import React16 from 'react-16';
 import React15 from 'react-15';
 
-import { type LabelProps, type OverlayProps } from './';
+import type { LabelProps, OverlayProps } from './Tooltip';
 
 function testReact(React, Tooltip) {
     const HIDDEN_CLASS = 'HIDDEN_CLASS';
