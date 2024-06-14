@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
-import type { ElementProps, ComponentType } from 'react';
+import type { ComponentType } from 'react';
 
 export type LabelProps = {
     labelAttributes: {
-        tabIndex: '0',
-        'aria-describedby': string,
-        onFocus: () => void,
-    },
-    isHidden: boolean,
+        tabIndex: '0';
+        'aria-describedby': string;
+        onFocus: () => void;
+    };
+    isHidden: boolean;
 };
 
 export type OverlayProps = {
     overlayAttributes: {
-        role: 'tooltip',
-        tabIndex: '-1',
-        id: string,
-        'aria-hidden': string,
-    },
-    isHidden: boolean,
+        role: 'tooltip';
+        tabIndex: '-1';
+        id: string;
+        'aria-hidden': string;
+    };
+    isHidden: boolean;
 };
 
 export type TooltipState = {
-    isFocused: boolean,
-    isHovered: boolean,
+    isFocused: boolean;
+    isHovered: boolean;
 };
 
-export type TooltipProps = ElementProps<'div'> & {
-    label: ComponentType<LabelProps>,
-    overlay: ComponentType<OverlayProps>,
+export type TooltipProps = React.HTMLAttributes<HTMLDivElement> & {
+    label: ComponentType<LabelProps>;
+    overlay: ComponentType<OverlayProps>;
 };
 
 let counter = 0;
@@ -58,10 +58,10 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         this.setState({ isFocused: true });
     };
 
-    onBlur = ({
+    onBlur: React.FocusEventHandler<HTMLElement> = ({
         relatedTarget,
         currentTarget,
-    }: SyntheticFocusEvent<HTMLElement>) => {
+    }) => {
         // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
         const newTarget = relatedTarget || document.activeElement;
 
@@ -111,7 +111,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
         }
     };
 
-    container: ?HTMLDivElement;
+    container?: HTMLDivElement;
     identifier: string;
 
     render() {
