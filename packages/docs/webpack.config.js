@@ -6,7 +6,7 @@ const cssnano = require('cssnano');
 
 const config = {
     entry: {
-        'src/main.js': ['babel-polyfill', './src/main.js'],
+        'src/main.js': ['./src/main.js'],
     },
 
     output:
