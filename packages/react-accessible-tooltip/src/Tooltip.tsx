@@ -41,8 +41,8 @@ export function Tooltip({
     });
 
     useEffect(() => {
-        const onKeyDown = ({ key, keyCode, which }: KeyboardEvent) => {
-            if (key === 'Escape' || keyCode === 27 || which === 27) {
+        const onKeyDown = ({ key }: KeyboardEvent) => {
+            if (key === 'Escape') {
                 setState((current) => ({ ...current, isFocused: false }));
             }
         };
