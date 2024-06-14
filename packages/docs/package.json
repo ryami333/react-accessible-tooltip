@@ -52,7 +52,6 @@
         "build:react-accessible-tooltip": "yarn workspace react-accessible-tooltip build",
         "build": "yarn build:clean && yarn build:react-accessible-tooltip && yarn build:webpack",
         "deploy": "yarn build && gh-pages -d dist",
-        "test": "jest src",
         "lint": "eslint ."
     },
     "dependencies": {
