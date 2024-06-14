@@ -3,19 +3,19 @@
  */
 
 import React from 'react';
-import { RenderResult, render, fireEvent, act } from '@testing-library/react';
+import { RenderResult, render, fireEvent } from '@testing-library/react';
 import Tooltip from './Tooltip';
 
 import type { LabelProps, OverlayProps } from './Tooltip';
 
 describe('<Tooltip />', () => {
-    const Label = ({ isHidden, labelAttributes }: LabelProps) => (
+    const Label = ({ labelAttributes }: LabelProps) => (
         <div data-testid="label" {...labelAttributes}>
             My label
         </div>
     );
 
-    const Overlay = ({ isHidden, overlayAttributes }: OverlayProps) => (
+    const Overlay = ({ overlayAttributes }: OverlayProps) => (
         <div data-testid="overlay" {...overlayAttributes}>
             My overlay
         </div>
@@ -49,16 +49,6 @@ describe('<Tooltip />', () => {
     });
 
     describe(`${React.version} -`, () => {
-        // it('matches the previous snapshot', () => {
-        //     expect(toJson(wrapper)).toMatchSnapshot();
-        // });
-
-        // it("increments the overlay's `id` attribute with each instance.", () => {
-        //     expect(overlay.find('div').prop('id')).toEqual(
-        //         'react-accessible-tooltip-1', // as opposed to `react-accessible-tooltip-0`
-        //     );
-        // });
-
         it('hides the overlay by default', () => {
             expect(isOverlayHidden()).toBeTruthy();
         });
