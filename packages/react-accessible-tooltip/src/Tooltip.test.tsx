@@ -3,36 +3,21 @@
  */
 
 import React from 'react';
-import classnames from 'classnames';
 import { RenderResult, render, fireEvent, act } from '@testing-library/react';
 import Tooltip from './Tooltip';
 
 import type { LabelProps, OverlayProps } from './Tooltip';
 
-const HIDDEN_CLASS = 'HIDDEN_CLASS';
-const LABEL_CLASS = 'LABEL_CLASS';
-const OVERLAY_CLASS = 'OVERLAY_CLASS';
-
 describe('<Tooltip />', () => {
     const Label = ({ isHidden, labelAttributes }: LabelProps) => (
-        <div
-            data-testid="label"
-            className={classnames(LABEL_CLASS, {
-                [HIDDEN_CLASS]: isHidden,
-            })}
-            {...labelAttributes}
-        />
+        <div data-testid="label" {...labelAttributes}>
+            My label
+        </div>
     );
 
     const Overlay = ({ isHidden, overlayAttributes }: OverlayProps) => (
-        <div
-            data-testid="overlay"
-            className={classnames(OVERLAY_CLASS, {
-                [HIDDEN_CLASS]: isHidden,
-            })}
-            {...overlayAttributes}
-        >
-            Hello world
+        <div data-testid="overlay" {...overlayAttributes}>
+            My overlay
         </div>
     );
 
