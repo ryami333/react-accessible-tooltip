@@ -1,79 +1,79 @@
 {
-  "name": "react-accessible-tooltip",
-  "version": "2.0.3",
-  "description": "React utility component for building accessible tooltips.",
-  "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
-  "keywords": [
-    "tooltip",
-    "react",
-    "component",
-    "accessibility",
-    "aria"
-  ],
-  "main": "dist/umd/index.js",
-  "jsnext:main": "dist/es/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ryami333/react-accessible-tooltip.git"
-  },
-  "author": {
-    "name": "Mitch Ryan",
-    "url": "https://github.com/ryami333"
-  },
-  "contributors": [
-    {
-      "name": "Lydie Danet",
-      "url": "https://github.com/ldanet"
-    }
-  ],
-  "devDependencies": {
-    "@babel/cli": "^7.24.7",
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
-    "@babel/preset-typescript": "^7.24.7",
-    "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^26.0.1",
-    "classnames": "^2.2.5",
-    "coveralls": "^3.0.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "enzyme-to-json": "^3.3.1",
-    "eslint": "^4.18.2",
-    "prettier": "^3.3.2",
-    "react": "^16.2.0",
-    "react-15": "npm:react@15.6.1",
-    "react-16": "npm:react@16.2.0",
-    "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0",
-    "rimraf": "^2.6.2",
-    "rollup": "^4.18.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-replace": "^2.2.0"
-  },
-  "scripts": {
-    "build:rollup": "NODE_ENV=production rollup -c",
-    "build:clean": "rimraf \"dist/**/*\"",
-    "build": "yarn build:clean && yarn build:rollup",
-    "start": "rollup -c -w",
-    "test": "jest src",
-    "lint": "eslint src",
-    "prepublishOnly": "yarn build",
-    "coverage": "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
-  },
-  "files": [
-    "dist"
-  ],
-  "peerDependencies": {
-    "react": "^15.6.1 || ^16.0.0",
-    "react-dom": "^15.6.1 || ^16.0.0"
-  },
-  "jest": {
-    "setupFiles": [
-      "./src/setupTests.js"
+    "name": "react-accessible-tooltip",
+    "version": "2.0.3",
+    "description": "React utility component for building accessible tooltips.",
+    "homepage": "https://ryami333.github.io/react-accessible-tooltip/",
+    "keywords": [
+        "tooltip",
+        "react",
+        "component",
+        "accessibility",
+        "aria"
     ],
-    "collectCoverageFrom": [
-      "src/**/*.js",
-      "!src/setupTests.js"
-    ]
-  }
+    "main": "dist/umd/index.js",
+    "jsnext:main": "dist/es/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ryami333/react-accessible-tooltip.git"
+    },
+    "author": {
+        "name": "Mitch Ryan",
+        "url": "https://github.com/ryami333"
+    },
+    "contributors": [
+        {
+            "name": "Lydie Danet",
+            "url": "https://github.com/ldanet"
+        }
+    ],
+    "devDependencies": {
+        "@babel/cli": "^7.24.7",
+        "@babel/core": "^7.24.7",
+        "@babel/preset-env": "^7.24.7",
+        "@babel/preset-typescript": "^7.24.7",
+        "@rollup/plugin-babel": "^6.0.4",
+        "@rollup/plugin-commonjs": "^26.0.1",
+        "classnames": "^2.2.5",
+        "coveralls": "^3.0.0",
+        "enzyme": "^3.3.0",
+        "enzyme-adapter-react-16": "^1.1.1",
+        "enzyme-to-json": "^3.3.1",
+        "eslint": "^4.18.2",
+        "prettier": "^3.3.2",
+        "react": "^16.2.0",
+        "react-15": "npm:react@15.6.1",
+        "react-16": "npm:react@16.2.0",
+        "react-dom": "^16.2.0",
+        "react-test-renderer": "^16.2.0",
+        "rimraf": "^2.6.2",
+        "rollup": "^4.18.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-replace": "^2.2.0"
+    },
+    "scripts": {
+        "build:rollup": "NODE_ENV=production rollup -c",
+        "build:clean": "rimraf \"dist/**/*\"",
+        "build": "yarn build:clean && yarn build:rollup",
+        "start": "rollup -c -w",
+        "test": "jest src",
+        "lint": "eslint src",
+        "prepublishOnly": "yarn build",
+        "coverage": "yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls"
+    },
+    "files": [
+        "dist"
+    ],
+    "peerDependencies": {
+        "react": "^15.6.1 || ^16.0.0",
+        "react-dom": "^15.6.1 || ^16.0.0"
+    },
+    "jest": {
+        "setupFiles": [
+            "./src/setupTests.js"
+        ],
+        "collectCoverageFrom": [
+            "src/**/*.js",
+            "!src/setupTests.js"
+        ]
+    }
 }

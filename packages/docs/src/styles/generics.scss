@@ -1,18 +1,26 @@
 @import '../styles/settings';
 
 // No padding or margins.
-html, body {
+html,
+body {
     padding: 0;
     margin: 0;
     background-color: $color-brand-dark;
 }
 
 // Box sizing.
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
 }
 

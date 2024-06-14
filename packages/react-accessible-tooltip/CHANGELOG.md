@@ -4,28 +4,28 @@
 
 ### Fixed
 
-* Force close-on-touch-away on iOS.
+-   Force close-on-touch-away on iOS.
 
 ## v2.0.2
 
 ### Added
 
-* Support for close-on-escape-key.
+-   Support for close-on-escape-key.
 
 ## v2.0.0
 
 ### Added
 
-* Support for hover functionality.
+-   Support for hover functionality.
 
 ### Fixed
 
-* Apply `role="tooltip"` to overlay instead of label.
-* Force blur label on touch-away (iOS).
+-   Apply `role="tooltip"` to overlay instead of label.
+-   Force blur label on touch-away (iOS).
 
 ### Removed
 
-* Support for `containerRef` prop.
+-   Support for `containerRef` prop.
 
 ## vX.Y.Z
 

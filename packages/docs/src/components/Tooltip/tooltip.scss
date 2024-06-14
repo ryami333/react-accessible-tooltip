@@ -4,7 +4,7 @@
 .tooltip {
     display: inline-block;
     position: relative;
-    
+
     &__label {
         text-decoration: underline;
         cursor: pointer;
@@ -18,10 +18,9 @@
         position: absolute;
         bottom: 100%;
         left: 50%;
-        margin-left: - $width / 2;
+        margin-left: -$width / 2;
         color: $color-white;
         padding-bottom: 30px;
-
 
         &--hidden {
             display: none;

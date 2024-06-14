@@ -145,7 +145,7 @@ class Tooltip extends Component<TooltipProps, TooltipState> {
             <div
                 {...rest}
                 onBlur={this.onBlur}
-                ref={ref => {
+                ref={(ref) => {
                     this.container = ref;
                 }}
                 onMouseEnter={this.onMouseEnter}
