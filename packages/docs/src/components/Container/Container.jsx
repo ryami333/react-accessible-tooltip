@@ -1,5 +1,3 @@
-// @flow
-
 import React, { type ElementProps } from 'react';
 import classnames from 'classnames';
 import './container.scss';

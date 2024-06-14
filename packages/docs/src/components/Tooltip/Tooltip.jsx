@@ -1,5 +1,3 @@
-// @flow
-
 import React, { type Node } from 'react';
 import classnames from 'classnames';
 import { Tooltip as ReactAccessibleTooltip } from 'react-accessible-tooltip';

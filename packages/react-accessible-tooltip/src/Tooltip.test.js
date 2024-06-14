@@ -1,12 +1,8 @@
-// @flow
-
 import classnames from 'classnames';
 import toJson from 'enzyme-to-json';
 import { mount } from 'enzyme';
 
-// $FlowFixMe
 import React16 from 'react-16';
-// $FlowFixMe
 import React15 from 'react-15';
 
 import { type LabelProps, type OverlayProps } from './';
@@ -138,7 +134,6 @@ function testReact(React, Tooltip) {
                 label.simulate('focus');
                 expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
-                // $FlowFixMe
                 document.body.dispatchEvent(testEvent);
                 expect(isOverlayHidden()).toBeTruthy();
             });
@@ -147,7 +142,6 @@ function testReact(React, Tooltip) {
                 label.simulate('focus');
                 expect(isOverlayHidden()).toBeFalsy();
                 const testEvent = new Event('touchstart', { bubbles: true });
-                // $FlowFixMe;
                 overlayDiv.dispatchEvent(testEvent);
                 expect(isOverlayHidden()).toBeFalsy();
             });
