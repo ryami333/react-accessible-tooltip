@@ -1,11 +1,4 @@
-import React, {
-    Component,
-    useCallback,
-    useEffect,
-    useId,
-    useRef,
-    useState,
-} from 'react';
+import React, { useCallback, useEffect, useId, useRef, useState } from 'react';
 import type { ComponentType } from 'react';
 
 export type LabelProps = {
