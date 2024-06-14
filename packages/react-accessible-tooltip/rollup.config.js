@@ -1,5 +1,4 @@
 import resolve from 'rollup-plugin-node-resolve';
-import eslint from 'rollup-plugin-eslint';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from 'rollup-plugin-replace';
@@ -20,7 +19,6 @@ export default [
                 main: true,
                 browser: true,
             }),
-            eslint(),
             babel(),
             commonjs(),
             replace({
