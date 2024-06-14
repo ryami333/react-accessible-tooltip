@@ -15,7 +15,7 @@ export type OverlayProps = {
         role: 'tooltip';
         tabIndex: -1;
         id: string;
-        'aria-hidden': string;
+        'aria-hidden': boolean;
     };
     isHidden: boolean;
 };
@@ -108,7 +108,7 @@ export function Tooltip({
             role: 'tooltip',
             tabIndex: -1,
             id: identifier,
-            'aria-hidden': isHidden.toString(),
+            'aria-hidden': isHidden,
         },
         isHidden,
     };
