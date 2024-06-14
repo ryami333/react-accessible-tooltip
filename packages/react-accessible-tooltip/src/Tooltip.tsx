@@ -3,7 +3,7 @@ import type { ComponentType } from 'react';
 
 export type LabelProps = {
     labelAttributes: {
-        tabIndex: '0';
+        tabIndex: 0;
         'aria-describedby': string;
         onFocus: () => void;
     };
@@ -13,7 +13,7 @@ export type LabelProps = {
 export type OverlayProps = {
     overlayAttributes: {
         role: 'tooltip';
-        tabIndex: '-1';
+        tabIndex: -1;
         id: string;
         'aria-hidden': string;
     };
@@ -25,7 +25,11 @@ export type TooltipProps = React.HTMLAttributes<HTMLDivElement> & {
     overlay: ComponentType<OverlayProps>;
 };
 
-function FTooltip({ label: Label, overlay: Overlay, ...rest }: TooltipProps) {
+export function Tooltip({
+    label: Label,
+    overlay: Overlay,
+    ...rest
+}: TooltipProps) {
     const identifier = `react-accessible-tooltip-${useId()}`;
 
     const [state, setState] = useState<{
@@ -92,7 +96,7 @@ function FTooltip({ label: Label, overlay: Overlay, ...rest }: TooltipProps) {
 
     const labelProps: LabelProps = {
         labelAttributes: {
-            tabIndex: '0',
+            tabIndex: 0,
             'aria-describedby': identifier,
             onFocus: onFocus,
         },
@@ -102,7 +106,7 @@ function FTooltip({ label: Label, overlay: Overlay, ...rest }: TooltipProps) {
     const overlayProps: OverlayProps = {
         overlayAttributes: {
             role: 'tooltip',
-            tabIndex: '-1',
+            tabIndex: -1,
             id: identifier,
             'aria-hidden': isHidden.toString(),
         },
