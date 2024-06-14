@@ -73,11 +73,9 @@
         "react-dom": "^15.6.1 || ^16.0.0"
     },
     "jest": {
-        "setupFiles": [
-            "./src/setupTests.js"
-        ],
         "collectCoverageFrom": [
-            "src/**/*.js",
+            "src/**/*.ts",
+            "src/**/*.tsx",
             "!src/setupTests.js"
         ]
     }
