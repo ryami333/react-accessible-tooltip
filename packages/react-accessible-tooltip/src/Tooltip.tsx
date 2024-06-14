@@ -1,4 +1,11 @@
-import React, { Component } from 'react';
+import React, {
+    Component,
+    useCallback,
+    useEffect,
+    useId,
+    useRef,
+    useState,
+} from 'react';
 import type { ComponentType } from 'react';
 
 export type LabelProps = {
@@ -20,140 +27,132 @@ export type OverlayProps = {
     isHidden: boolean;
 };
 
-export type TooltipState = {
-    isFocused: boolean;
-    isHovered: boolean;
-};
-
 export type TooltipProps = React.HTMLAttributes<HTMLDivElement> & {
     label: ComponentType<LabelProps>;
     overlay: ComponentType<OverlayProps>;
 };
 
-let counter = 0;
+function FTooltip({ label: Label, overlay: Overlay, ...rest }: TooltipProps) {
+    const identifier = `react-accessible-tooltip-${useId()}`;
 
-class Tooltip extends Component<TooltipProps, TooltipState> {
-    constructor(props: TooltipProps) {
-        super(props);
-        this.identifier = `react-accessible-tooltip-${counter}`;
-        counter += 1;
-    }
-
-    state = {
+    const [state, setState] = useState<{
+        isFocused: boolean;
+        isHovered: boolean;
+    }>({
         isFocused: false,
         isHovered: false,
-    };
+    });
 
-    componentDidMount() {
-        document.addEventListener('keydown', this.handleKeyDown);
-        document.addEventListener('touchstart', this.handleTouch);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this.handleKeyDown);
-        document.removeEventListener('touchstart', this.handleTouch);
-    }
-
-    onFocus = () => {
-        this.setState({ isFocused: true });
-    };
-
-    onBlur: React.FocusEventHandler<HTMLElement> = ({
-        relatedTarget,
-        currentTarget,
-    }) => {
-        // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
-        const newTarget = relatedTarget || document.activeElement;
-
-        // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
-        if (!(newTarget && newTarget instanceof HTMLElement)) {
-            this.setState({ isFocused: false });
-        } else if (!currentTarget.contains(newTarget)) {
-            this.setState({ isFocused: false });
-        }
-    };
-
-    onMouseEnter = () => {
-        this.setState({ isHovered: true });
-    };
-
-    onMouseLeave = () => {
-        this.setState({ isHovered: false });
-    };
-
-    // This handles the support for touch devices that do not trigger blur on 'touch-away'.
-    handleTouch = ({ target }: Event) => {
-        const { activeElement } = document;
-
-        if (
-            activeElement instanceof Element &&
-            target instanceof Element &&
-            this.container instanceof Element &&
-            !this.container.contains(target) && // touch target not a tooltip descendent
-            this.state.isFocused // prevent redundant state change
-        ) {
-            this.setState({ isFocused: false });
-            activeElement.blur();
-        } else if (
-            activeElement instanceof Element &&
-            target instanceof Element &&
-            this.container instanceof Element &&
-            this.container.contains(target) && // touch target is on tooltip descendant
-            !this.state.isFocused // prevent redundant state change
-        ) {
-            this.setState({ isFocused: true });
-        }
-    };
-
-    handleKeyDown = ({ key, keyCode, which }: KeyboardEvent) => {
-        if (key === 'Escape' || keyCode === 27 || which === 27) {
-            this.setState({ isFocused: false });
-        }
-    };
-
-    container?: HTMLDivElement;
-    identifier: string;
-
-    render() {
-        const { label: Label, overlay: Overlay, ...rest } = this.props;
-
-        const { isFocused, isHovered } = this.state;
-        const isHidden = !(isFocused || isHovered);
-
-        const labelProps: LabelProps = {
-            labelAttributes: {
-                tabIndex: '0',
-                'aria-describedby': this.identifier,
-                onFocus: this.onFocus,
-            },
-            isHidden,
+    useEffect(() => {
+        const onKeyDown = ({ key, keyCode, which }: KeyboardEvent) => {
+            if (key === 'Escape' || keyCode === 27 || which === 27) {
+                setState((current) => ({ ...current, isFocused: false }));
+            }
         };
 
-        const overlayProps: OverlayProps = {
-            overlayAttributes: {
-                role: 'tooltip',
-                tabIndex: '-1',
-                id: this.identifier,
-                'aria-hidden': isHidden.toString(),
-            },
-            isHidden,
+        document.addEventListener('keydown', onKeyDown);
+
+        return () => document.removeEventListener('keydown', onKeyDown);
+    }, []);
+
+    useEffect(() => {
+        // This handles the support for touch devices that do not trigger blur on 'touch-away'.
+        const onTouchStart = ({ target }: Event) => {
+            const { activeElement } = document;
+
+            const container = containerRef.current;
+
+            if (
+                activeElement instanceof Element &&
+                target instanceof Element &&
+                container instanceof Element &&
+                !container.contains(target) // touch target not a tooltip descendent
+            ) {
+                setState((current) => ({ ...current, isFocused: false })); // TODO: prevent redundant state change.
+                if (activeElement instanceof HTMLElement) {
+                    activeElement.blur();
+                }
+            } else if (
+                activeElement instanceof Element &&
+                target instanceof Element &&
+                container instanceof Element &&
+                container.contains(target) // touch target is on tooltip descendant
+            ) {
+                setState((current) => ({ ...current, isFocused: true })); // TODO: prevent redundant state change.
+            }
         };
 
-        return (
-            <div
-                {...rest}
-                onBlur={this.onBlur}
-                ref={(ref) => {
-                    this.container = ref;
-                }}
-                onMouseEnter={this.onMouseEnter}
-                onMouseLeave={this.onMouseLeave}
-            >
-                <Label {...labelProps} />
-                <Overlay {...overlayProps} />
-            </div>
-        );
-    }
+        document.addEventListener('touchstart', onTouchStart);
+
+        return () => document.removeEventListener('touchstart', onTouchStart);
+    }, []);
+
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
+    const { isFocused, isHovered } = state;
+    const isHidden = !(isFocused || isHovered);
+
+    const onFocus = useCallback(
+        () => setState((current) => ({ ...current, isFocused: true })), // TODO: prevent redundant state change
+        [],
+    );
+
+    const labelProps: LabelProps = {
+        labelAttributes: {
+            tabIndex: '0',
+            'aria-describedby': identifier,
+            onFocus: onFocus,
+        },
+        isHidden,
+    };
+
+    const overlayProps: OverlayProps = {
+        overlayAttributes: {
+            role: 'tooltip',
+            tabIndex: '-1',
+            id: identifier,
+            'aria-hidden': isHidden.toString(),
+        },
+        isHidden,
+    };
+
+    const onBlur = useCallback<React.FocusEventHandler>(
+        ({ relatedTarget, currentTarget }) => {
+            // relatedTarget is better for React testability etc, but activeElement works as an IE11 fallback:
+            const newTarget = relatedTarget || document.activeElement;
+
+            // The idea of this logic is that we should only close the tooltip if focus has shifted from the tooltip AND all of its descendents.
+            if (!(newTarget && newTarget instanceof HTMLElement)) {
+                setState((current) => ({ ...current, isFocused: false }));
+            } else if (!currentTarget.contains(newTarget)) {
+                setState((current) => ({ ...current, isFocused: false }));
+            }
+        },
+        [],
+    );
+
+    const onMouseEnter = useCallback<React.MouseEventHandler>(
+        () => setState((current) => ({ ...current, isHovered: true })),
+        [],
+    );
+
+    const onMouseLeave = useCallback<React.MouseEventHandler>(
+        () => setState((current) => ({ ...current, isHovered: false })),
+        [],
+    );
+
+    return (
+        <div
+            {...rest}
+            onBlur={onBlur}
+            ref={containerRef}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        >
+            <Label {...labelProps} />
+            <Overlay {...overlayProps} />
+        </div>
+    );
 }
 
 export default Tooltip;
