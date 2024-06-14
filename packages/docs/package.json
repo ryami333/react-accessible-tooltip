@@ -25,6 +25,7 @@
     "eslint": "^4.6.1",
     "gh-pages": "^1.1.0",
     "html-loader": "^5.0.0",
+    "postcss": "^8.4.38",
     "postcss-loader": "^8.1.1",
     "prettier": "^1.6.1",
     "raw-loader": "^4.0.2",
