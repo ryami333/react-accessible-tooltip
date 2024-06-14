@@ -1,12 +1,12 @@
-import resolve from 'rollup-plugin-node-resolve';
+import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from 'rollup-plugin-replace';
-import pkg from './package.json';
+import pkg from './package.json' with { type: 'json' };
 
 export default [
     {
-        input: 'src/index.js',
+        input: 'src/index.ts',
         external: ['react'],
         output: [
             { file: pkg.main, format: 'umd' },
@@ -14,12 +14,12 @@ export default [
         ],
         name: 'reactAccessibleTooltip',
         plugins: [
+            babel(),
             resolve({
                 jsnext: true,
                 main: true,
                 browser: true,
             }),
-            babel(),
             commonjs(),
             replace({
                 exclude: 'node_modules/**',
