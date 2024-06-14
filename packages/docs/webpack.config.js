@@ -28,7 +28,7 @@ const config = {
                     /(node_modules)/,
                     /(packages\/react-accessible-tooltip)/,
                 ],
-                use: ['babel-loader', 'eslint-loader'],
+                use: ['babel-loader'],
             },
             {
                 test: /\.scss$/,
