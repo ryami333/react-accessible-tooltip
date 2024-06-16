@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "lib": ["es2023"],
+        "module": "node16",
+        "target": "es2022",
+        "noEmit": true,
+        "allowJs": true,
+        "checkJs": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "moduleResolution": "node16",
+        "jsx": "preserve"
+    },
+    "include": ["src/**/*"],
+    "exclude": ["**/node_modules", "dist"]
+}
