@@ -1,6 +1,8 @@
 {
-    "private": true,
-    "workspaces": [
-        "packages/react-accessible-tooltip", "packages/docs"
-    ]
+  "private": true,
+  "workspaces": [
+    "packages/react-accessible-tooltip",
+    "packages/docs"
+  ],
+  "packageManager": "yarn@4.3.0"
 }

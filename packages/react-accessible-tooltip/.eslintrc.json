@@ -1,0 +1,13 @@
+{
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "plugins": ["@typescript-eslint/eslint-plugin"],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "error",
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/no-non-null-assertion": "error",
+        "@typescript-eslint/ban-ts-comment": [
+            "error",
+            { "ts-ignore": "allow-with-description" }
+        ]
+    }
+}
