@@ -15,10 +15,10 @@ export default [
             { file: pkg.main, format: 'cjs' },
             { file: pkg['jsnext:main'], format: 'es' },
         ],
-        name: 'reactAccessibleTooltip',
         plugins: [
             babel({
                 extensions,
+                babelHelpers: 'bundled',
             }),
             resolve({
                 jsnext: true,
