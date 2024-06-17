@@ -25,7 +25,6 @@ describe('<Tooltip />', () => {
     let container: HTMLElement;
     let label: HTMLElement;
     let overlay: HTMLElement;
-    let overlayDiv: HTMLElement;
 
     function isOverlayHidden() {
         return overlay.getAttribute('aria-hidden') === 'true';
@@ -41,7 +40,6 @@ describe('<Tooltip />', () => {
         container = wrapper.getByTestId('container');
         label = wrapper.getByTestId('label');
         overlay = wrapper.getByTestId('overlay');
-        overlayDiv = wrapper.getByTestId('overlay');
     });
 
     afterEach(() => {
