@@ -32,6 +32,7 @@
         "eslint": "8",
         "gh-pages": "^1.1.0",
         "html-loader": "^5.0.0",
+        "html-webpack-plugin": "^5.6.0",
         "postcss": "^8.4.38",
         "postcss-loader": "^8.1.1",
         "prettier": "^3.3.2",
@@ -42,6 +43,7 @@
         "style-loader": "^4.0.0",
         "typescript": "^5.4.5",
         "webpack": "^5.92.0",
+        "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4"
     },
     "scripts": {
