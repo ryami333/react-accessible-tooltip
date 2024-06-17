@@ -57,7 +57,7 @@
     "scripts": {
         "build:rollup": "NODE_ENV=production rollup -c",
         "build:clean": "rimraf \"dist/**/*\"",
-        "build": "yarn build:clean && yarn build:rollup",
+        "build": "yarn build:clean && yarn build:rollup && yarn tsc --outDir dist/es && yarn tsc --outDir dist/umd",
         "start": "rollup -c -w",
         "test": "jest src",
         "lint": "eslint .",
