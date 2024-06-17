@@ -10,6 +10,10 @@ const config = {
         'src/main.js': ['./src/main.js'],
     },
 
+    resolve: {
+        extensions: ['...', '.ts', '.tsx'],
+    },
+
     output:
         process.env.NODE_ENV === 'production'
             ? {
@@ -24,7 +28,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(jsx?|tsx?)$/,
                 exclude: [
                     /(node_modules)/,
                     /(packages\/react-accessible-tooltip)/,
