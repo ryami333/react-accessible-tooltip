@@ -4471,7 +4471,7 @@ __metadata:
     prettier: "npm:^3.3.2"
     raw-loader: "npm:^4.0.2"
     react: "npm:^18.3.1"
-    react-accessible-tooltip: "npm:2.0.0"
+    react-accessible-tooltip: "npm:2.0.3"
     react-dom: "npm:^18.3.1"
     react-test-renderer: "npm:^18.3.1"
     rimraf: "npm:^5.0.7"
@@ -8655,17 +8655,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-accessible-tooltip@npm:2.0.0":
-  version: 2.0.0
-  resolution: "react-accessible-tooltip@npm:2.0.0"
-  peerDependencies:
-    react: ^15.6.1 || ^16.0.0
-    react-dom: ^15.6.1 || ^16.0.0
-  checksum: 10c0/113ee9572032857849a8cacc9e0365badcd0dea4e3cb830088b9df888ebd40b0503a912c5e1e76e7ddf7081e6c505ba35377df77546797b9a89d3ddd42a8c088
-  languageName: node
-  linkType: hard
-
-"react-accessible-tooltip@workspace:packages/react-accessible-tooltip":
+"react-accessible-tooltip@npm:2.0.3, react-accessible-tooltip@workspace:packages/react-accessible-tooltip":
   version: 0.0.0-use.local
   resolution: "react-accessible-tooltip@workspace:packages/react-accessible-tooltip"
   dependencies:
