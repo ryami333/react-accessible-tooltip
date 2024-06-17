@@ -46,9 +46,9 @@
         "webpack-dev-server": "^5.0.4"
     },
     "scripts": {
-        "start": "webpack-dev-server",
+        "dev": "webpack-dev-server --mode=development",
         "build:clean": "rimraf \"dist/**/*\"",
-        "build:webpack": "NODE_ENV=production webpack",
+        "build:webpack": "webpack --mode=production",
         "build:react-accessible-tooltip": "yarn workspace react-accessible-tooltip build",
         "build": "yarn build:clean && yarn build:react-accessible-tooltip && yarn build:webpack",
         "deploy": "yarn build && gh-pages -d dist",

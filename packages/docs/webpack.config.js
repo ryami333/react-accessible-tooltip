@@ -7,23 +7,12 @@ const cssnano = require('cssnano');
 
 const config = {
     entry: {
-        'src/main.js': ['./src/main.js'],
+        main: ['./src/main.js'],
     },
 
     resolve: {
         extensions: ['...', '.ts', '.tsx'],
     },
-
-    output:
-        process.env.NODE_ENV === 'production'
-            ? {
-                  path: path.resolve(__dirname, 'dist'),
-                  filename: '[name][chunkhash].js',
-              }
-            : {
-                  path: '/',
-                  filename: '[name]',
-              },
 
     module: {
         rules: [
