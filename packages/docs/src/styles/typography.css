@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+:root {
+    --font-family-raleway: 'Raleway', sans-serif;
+    --font-weight-raleway-regular: 'Raleway', sans-serif;
+    --font-family-open-sans: 'Open Sans', sans-serif;
+    --font-weight-open-sans-regular: 400;
+    --font-weight-open-sans-semibold: 700;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../Container/Container';
-import './content.scss';
+import './content.css';
 import Tooltip from '../Tooltip/Tooltip';
 
 function Content() {

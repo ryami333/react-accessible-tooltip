@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import './container.scss';
+import './container.css';
 
 function Container({
     className,

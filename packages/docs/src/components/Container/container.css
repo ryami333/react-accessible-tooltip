@@ -1,13 +1,11 @@
-@import '../../styles/settings';
-
 .container {
     left: 0;
     right: 0;
     margin: 0 auto;
     max-width: 1024px;
-    padding: $spacing-section $spacing-gutter;
+    padding: var(--spacing-section) var(--spacing-gutter);
 
     display: grid;
     grid-template-columns: 1fr;
-    grid-row-gap: $spacing-margin;
+    grid-row-gap: var(--spacing-margin);
 }

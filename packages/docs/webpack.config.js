@@ -36,19 +36,18 @@ const config = {
                 use: ['babel-loader'],
             },
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: [
                     'style-loader',
                     'css-loader',
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins() {
-                                return [autoprefixer, cssnano];
+                            postcssOptions: {
+                                plugins: [autoprefixer, cssnano],
                             },
                         },
                     },
-                    'sass-loader',
                 ],
             },
             {

@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { Tooltip as ReactAccessibleTooltip } from 'react-accessible-tooltip';
-import './tooltip.scss';
+import './tooltip.css';
 
 function Tooltip({
     label,

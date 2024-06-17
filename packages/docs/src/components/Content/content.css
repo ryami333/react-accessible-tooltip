@@ -1,0 +1,15 @@
+.content {
+    background-color: var(--color-grey-light);
+
+    p {
+        font-family: var(--font-family-open-sans);
+        font-weight: var(--font-weight-open-sans-regular);
+        font-size: 1.2rem;
+
+        @media (max-width: 420px) {
+            font-size: 1rem;
+        }
+
+        color: var(--color-grey-dark);
+    }
+}

@@ -1,0 +1,25 @@
+.header {
+    background-color: var(--color-brand-light);
+}
+
+.header__title {
+    font-family: var(--font-family-raleway);
+    font-weight: var(--font-weight-raleway-regular);
+    font-size: 4rem;
+
+    @media (max-width: 420px) {
+        font-size: 2rem;
+    }
+    color: var(--color-grey-dark);
+}
+
+.header__subtitle {
+    font-family: var(--font-family-raleway);
+    font-weight: var(--font-weight-raleway-regular);
+    font-size: 2rem;
+    color: var(--color-brand-dark);
+
+    @media (max-width: 420px) {
+        font-size: 1.6rem;
+    }
+}
