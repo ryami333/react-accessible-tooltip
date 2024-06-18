@@ -30,7 +30,7 @@
         "start": "next start",
         "build:react-accessible-tooltip": "yarn workspace react-accessible-tooltip build",
         "build": "yarn build:react-accessible-tooltip && yarn next build",
-        "deploy": "yarn build && gh-pages -d out",
+        "deploy": "yarn build && gh-pages -d out --nojekyll",
         "lint": "next lint"
     },
     "dependencies": {
