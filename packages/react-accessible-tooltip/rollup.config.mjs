@@ -1,8 +1,8 @@
 /* eslint-env node */
 
 import resolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
-import replace from 'rollup-plugin-replace';
+import { babel } from '@rollup/plugin-babel';
+import replace from '@rollup/plugin-replace';
 import pkg from './package.json' with { type: 'json' };
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -29,6 +29,7 @@ export default [
             replace({
                 exclude: 'node_modules/**',
                 ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+                preventAssignment: true,
             }),
         ],
     },
