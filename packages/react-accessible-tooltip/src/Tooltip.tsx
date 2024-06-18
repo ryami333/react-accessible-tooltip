@@ -139,7 +139,7 @@ export function Tooltip({
     );
 
     return (
-        <div
+        <span
             {...rest}
             onBlur={onBlur}
             ref={containerRef}
@@ -148,7 +148,7 @@ export function Tooltip({
         >
             <Label {...labelProps} />
             <Overlay {...overlayProps} />
-        </div>
+        </span>
     );
 }
 
