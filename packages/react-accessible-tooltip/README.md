@@ -1,4 +1,4 @@
-# React Accessible Tooltip · ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![NPM release](https://img.shields.io/npm/v/react-accessible-tooltip.svg) ![CircleCI Status](https://circleci.com/gh/ryami333/react-accessible-tooltip.svg?style=shield&circle-token=:circle-token) ![Code coverage](https://img.shields.io/coveralls/github/ryami333/react-accessible-tooltip.svg)
+# React Accessible Tooltip · ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![NPM release](https://img.shields.io/npm/v/react-accessible-tooltip.svg) ![Code coverage](https://img.shields.io/coveralls/github/ryami333/react-accessible-tooltip.svg)
 
 Try out the **interactive demo**
 [here](https://ryami333.github.io/react-accessible-tooltip/).
