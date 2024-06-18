@@ -25,28 +25,28 @@ npm install react-accessible-tooltip react react-dom
 ### Basic Usage
 
 ```js
-import { Tooltip } from 'react-accessible-tooltip';
+import { Tooltip } from "react-accessible-tooltip";
 ```
 
 ```jsx
 <Tooltip
-    label={(props) => (
-        <span {...props.labelAttributes} className="tooltip-label">
-            {`hover me for info`}
-        </span>
-    )}
-    overlay={(props) => (
-        <span
-            {...props.overlayAttributes}
-            className={
-                props.isHidden
-                    ? 'tooltip-overlay tooltip-overlay--hidden'
-                    : 'tooltip-overlay'
-            }
-        >
-            {`this is more info`}
-        </span>
-    )}
+  label={(props) => (
+    <span {...props.labelAttributes} className="tooltip-label">
+      {`hover me for info`}
+    </span>
+  )}
+  overlay={(props) => (
+    <span
+      {...props.overlayAttributes}
+      className={
+        props.isHidden
+          ? "tooltip-overlay tooltip-overlay--hidden"
+          : "tooltip-overlay"
+      }
+    >
+      {`this is more info`}
+    </span>
+  )}
 />
 ```
 
